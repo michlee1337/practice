@@ -69,3 +69,71 @@ def tryTryAgain(s,x):
         c += 1
 
     return(b)
+
+# 1.13: OBJECT ORIENTED PROGRAMMING - CLASSES
+
+class Fraction:
+
+    # __init__ : the constructor function
+    #    should be first method defined for any class
+
+    # self is a special parameter that references object itself
+    #   must always be first formal parameter
+    #   will never be invoked
+    def __init__(self,top,bottom):
+        self.num = top
+        self.den = bottom
+
+    def show(self):
+        print(self.num,"/",self.den)
+
+    # __str__ is called on print(OBJ)
+    #    default is to refer to invoked var's address
+    #    can be overriden w own function
+    def __str__(self):
+        return str(self.num) + "/" + str(self.den)
+
+    # Euclid's algo for finding highest common divisor
+    def gcd(m,n):
+        while m%n != 0:
+            oldm = m
+            oldn = n
+
+            m = oldn
+            n = oldm%oldn
+        return n
+
+    print(gcd(20,10))
+
+    # overriding default add operator "+"
+    def __add__(self,otherfraction):
+
+         newnum = self.num*otherfraction.den + self.den*otherfraction.num
+         newden = self.den * otherfraction.den
+         common = gcd(newnum,newden)
+
+     return Fraction(newnum//common,newden//common)
+
+    # overriding equal operator "=="
+    def __eq__(self, other):
+        firstnum = self.num * other.den
+        secondnum = other.num * self.den
+
+        return firstnum == secondnum
+
+# INHERITENCE: classes can inherit traits from each other (super class, sub class)
+
+# superclass LogicGate
+#       it has a method that will be written as we create each logic gate (self.)
+class LogicGate:
+
+    def __init__(self,n):
+        self.label = n
+        self.output = None
+
+    def getLabel(self):
+        return self.label
+
+    def getOutput(self):
+        self.output = self.performGateLogic()
+        return self.output

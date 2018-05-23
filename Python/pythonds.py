@@ -137,3 +137,21 @@ class LogicGate:
     def getOutput(self):
         self.output = self.performGateLogic()
         return self.output
+
+
+# RECURSION
+# 1) base called
+# 2) must change state towards base case
+# 3) must call itself recursively
+
+# function to return the numbers in their binary versions
+def base2(n):
+    # can be broken up into (dividend%2) + n/%2
+
+    # base case: n<2
+    if(n<2):
+        return(n%2)
+
+    # (dividend%2) + n/%2
+    else:
+        return(str(base2(n//2)) + str(n%2))

@@ -249,3 +249,33 @@ def isPal(s):
     else:
         return isPal(s[1:-1])
     return False
+
+# Write a program to solve the following problem:
+# You have two jugs: a 4-gallon jug and a 3-gallon jug.
+# Neither of the jugs have markings on them.
+# There is a pump that can be used to fill the jugs with water.
+# How can you get exactly two gallons of water in the 4-gallon jug?
+# Generalize the problem above so that the parameters to your solution include
+# the sizes of each jug and the final amount of water to be left in the larger jug.
+
+
+# Write a program that solves the following problem:
+# Three missionaries and three cannibals come to a river and find a boat that holds two people.
+# Everyone must get across the river to continue on the journey.
+# However, if the cannibals ever outnumber the missionaries on either bank, the missionaries will be eaten.
+# Find a series of crossings that will get everyone safely to the other side of the river.
+def crossyRivers(nGood, nBad):
+    # define who is where
+    start = [nGood,nBad]
+    end = [0,0]
+
+    # if its safe, transport a good person over
+    if nGood > nBad + 1:
+        start[0] -= 1
+        end[0] += 1
+    # else, transport a bad person over
+    else:
+        start[1] -= 1
+        end[1] += 1
+
+    return(start,end)

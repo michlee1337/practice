@@ -122,6 +122,7 @@ class Fraction:
         return firstnum == secondnum
 
 # INHERITENCE: classes can inherit traits from each other (super class, sub class)
+# this is a IS-A relationship
 
 # superclass LogicGate
 #       it has a method that will be written as we create each logic gate (self.)
@@ -138,6 +139,73 @@ class LogicGate:
         self.output = self.performGateLogic()
         return self.output
 
+# sub class: inherits from a superclass
+class BinaryGate(LogicGate):
+
+    def __init__(self,n):
+        LogicGate.__init__(self,n)
+
+        self.pinA = None
+        self.pinB = None
+
+    def getPinA(self):
+        return int(input("Enter Pin A input for gate "+ self.getLabel()+"-->"))
+
+    def getPinB(self):
+        return int(input("Enter Pin B input for gate "+ self.getLabel()+"-->"))
+
+    def setNextPin(self,source):
+    if self.pinA == None:
+        self.pinA = source
+    else:
+        if self.pinB == None:
+            self.pinB = source
+        else:
+           raise RuntimeError("Error: NO EMPTY PINS")
+
+class UnaryGate(LogicGate):
+
+    def __init__(self,n):
+
+        # can replace explicit call to parent(s) with super
+        # ex: super(UnaryGate,self).__init__(n).
+        LogicGate.__init__(self,n)
+
+        self.pin = None
+
+    def getPin(self):
+        return int(input("Enter Pin input for gate "+ self.getLabel()+"-->"))
+
+class AndGate(BinaryGate):
+
+    def __init__(self,n):
+        super(AndGate,self).__init__(self,n)
+
+    def performGateLogic(self):
+
+        a = self.getPinA()
+        b = self.getPinB()
+        if a==1 and b==1:
+            return 1
+        else:
+            return 0
+
+# connectors have a HAS-A relationship
+# they have instances of logic gate class within the,but are not part of the hiarchy
+
+class Connector:
+
+    def __init__(self, fgate, tgate):
+        self.fromgate = fgate
+        self.togate = tgate
+
+        tgate.setNextPin(self)
+
+    def getFrom(self):
+        return self.fromgate
+
+    def getTo(self):
+        return self.togate
 
 # RECURSION
 # 1) base called
@@ -145,6 +213,13 @@ class LogicGate:
 # 3) must call itself recursively
 
 # function to return the numbers in their binary versions
+
+def addition(nList):
+    if len(nList) == 1:
+        return (nList[0])
+    else:
+        return (nList[0] + addition(nList[1:]))
+
 def base2(n):
     # can be broken up into (dividend%2) + n/%2
 
@@ -155,3 +230,22 @@ def base2(n):
     # (dividend%2) + n/%2
     else:
         return(str(base2(n//2)) + str(n%2))
+
+# reverse string w recursion
+def reverse(s):
+    # can be summrised into s[-1] + restOfList[-1]
+    if len(s) <= 1:
+        return s
+    else:
+        return s[-1] + reverse(s[:-1])
+
+# check for palindroms with RECURSION
+def isPal(s):
+    # compare first and last word recursively
+    if len(s) <= 1:
+        return True
+    elif s[0] != s[-1]:
+        return False
+    else:
+        return isPal(s[1:-1])
+    return False

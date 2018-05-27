@@ -269,13 +269,14 @@ def crossyRivers(nGood, nBad):
     start = [nGood,nBad]
     end = [0,0]
 
-    # if its safe, transport a good person over
-    if nGood > nBad + 1:
-        start[0] -= 1
-        end[0] += 1
-    # else, transport a bad person over
-    else:
-        start[1] -= 1
-        end[1] += 1
+    while start != [0,0]:
+        # if its safe, transport a good person over
+        if nGood > nBad + 1:
+            start[0] -= 1
+            end[0] += 1
+        # else, transport a bad person over
+        else:
+            start[1] -= 1
+            end[1] += 1
 
     return(start,end)

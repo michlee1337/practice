@@ -37,3 +37,16 @@ def bubBub(L):
     return(L)
 
 # print(bubBub([7,74,3,774,5,1,3,2]))
+
+
+def selectSort(L):
+    sorted = []
+
+    while len(L) > 0: # for each item in list
+        print(L, min(L))
+        sorted.append(min(L)) # EXP: put lowest value in last positon of sorted list
+        L.remove(min(L)) #EXP: remove lowest value from unsorted list
+
+    return(sorted)
+
+print(selectSort([5,0,4,8,39,8]))

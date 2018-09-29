@@ -1,3 +1,6 @@
+# Tversky studied Philadelphia 76ers basketball games from 1980-1981
+# players estimate
+
 # Basketball
 # player has 50-50 chance of scoring
 p = 0.5

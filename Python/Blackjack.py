@@ -1,6 +1,6 @@
 # blackjack
 
-# define cards class (number, suit)
+# define cards and players
 
 class card:
     def __init__(self, number, suit):
@@ -28,27 +28,23 @@ def draw(p1):
     card = deck.pop()
     p1.cards.append(card)
     p1.total += card.number
+    return(0)
 
 # deal function
 def deal(pList):
     for i in pList:
         draw(i)
         draw(i)
+    return(0)
 
 # check who won function
 def whoWon(ps):
     dummy = player('dumdum')
     winner = dummy
     for i in ps:
-        print(winner.name)
         if i.total > winner.total:
             winner = i
-    print(winner.name)
     return(winner)
-Ann = player('Ann')
-Bnn = player('Bnn')
-deal([Ann,Bnn])
-print(Ann.total,Bnn.total)
-whoWon([Ann,Bnn])
 
 # main code for gameplay
+pName = input('Hi! What\'s your name? ')

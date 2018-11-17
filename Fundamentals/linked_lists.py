@@ -62,18 +62,46 @@ class DoublyNode:
             else:
                 node = node.last
 
-def connectNodes(node1,node2):
-    node1.next = node2
-    node2.last = node1
+def connectNodes(arr):
+    arr[0].next = arr[1]
+    for i in arr[1:-1]:
+        arr[i].next = arr[i+1]
+        arr[i+1].last = arr[i]
+    arr[len(arr)-1].last = arr[len(arr)-2]
 
 nodly1 = DoublyNode(31)
 nodly2 = DoublyNode(7)
 
-connectNodes(nodly1,nodly2)
+connectNodes([nodly1,nodly2])
 
-print(nodly1)
 nodly1.traverse()
-nodly2.traverse(forward=False)
-#nodly1.traverse()
-# Challenges
-#
+nodly2.traverse(False)
+
+'''
+ Challenges
+'''
+
+# traverse linked list
+
+# remove duplicates from linked list
+
+# traverse
+    # for each
+        # check if it matches any previously seen vals
+
+# test case
+
+n1 = Node('a')
+n2 = Node('b')
+n3 = Node('c')
+
+connectNodes([n1,n2,n3])
+
+
+# get kth to last element from a linked list
+
+# delete a node from linked list
+
+# add two linked lists from left to right
+
+# add two linked lists from right to left

@@ -96,27 +96,28 @@ class DoublyNode:
 
 def connectDNodes(arr):
     arr[0].next = arr[1]
-    for i in arr[1:-1]:
+    for i in range(1,len(arr)-1):
         arr[i].next = arr[i+1]
-        arr[i+1].last = arr[i]
+        arr[i].last = arr[i-1]
     arr[len(arr)-1].last = arr[len(arr)-2]
     return(0)
 
-nodly1 = DoublyNode(31)
-nodly2 = DoublyNode(7)
-
-connectDNodes([nodly1,nodly2])
 
 '''
+nodly1 = DoublyNode('a')
+nodly2 = DoublyNode('b')
+nodly3 = DoublyNode('c')
+nodly4 = DoublyNode('d')
+connectDNodes([nodly1,nodly2,nodly3,nodly4])
+
+
 #testing
 nodly1.traverse()
-nodly2.traverse(False)
+nodly4.traverse(False)
 '''
 
 #___________________CHALLENGES________________
-'''
- remove duplicates from linked list
-'''
+''' remove duplicates from linked list '''
 
 def delDuples(node1):
     # counting vars
@@ -124,16 +125,20 @@ def delDuples(node1):
     node = node1
     count = 0
 
-    while node != None: # as long as we arent at end of the linked list
+    while node != None: # until the end of the linked list
         # check if val has been seen before
+        # if it has, delete it
         if node.val in vals:
             delNode(node1,count)
             count -= 1
+        # else add value to the log and move on
         else:
             vals.append(node.val)
         count+=1
         node = node.next
     return(0)
+'''
+# Testing
 
 d1 = Node('a')
 d2 = Node('a')
@@ -149,9 +154,37 @@ d1.traverse()
 print('after')
 delDuples(d1)
 d1.traverse()
+'''
 
+'''
+get kth to last element from a linked list
 
-# get kth to last element from a linked list
+this would probs be easier with a doubly linked list.
+or if we knew the length of a linked list through a linked list class
+lets do doubly
+'''
+
+def remKNode(nodeEnd,k):
+    node = nodeEnd
+    for i in range(k):
+        node = node.last
+        print(node.val,node.last.val)
+        print(node.next)
+    # could make a helper func here but maybe later
+    # check if we got to right place
+    print(node.val,node.next.val, node.last.val)
+    node.next.last = node.last
+    node.last.next = node.next
+
+nodly1 = DoublyNode('a')
+nodly2 = DoublyNode('b')
+nodly3 = DoublyNode('c')
+nodly4 = DoublyNode('d')
+connectDNodes([nodly1,nodly2,nodly3,nodly4])
+
+#testing that the doubly linked list is working
+
+#remKNode(nodly4,1)
 
 # delete a node from linked list
 

@@ -168,24 +168,26 @@ def remKNode(nodeEnd,k):
     node = nodeEnd
     for i in range(k):
         node = node.last
-        print(node.val,node.last.val)
-        print(node.next)
-    # could make a helper func here but maybe later
-    # check if we got to right place
-    print(node.val,node.next.val, node.last.val)
-    node.next.last = node.last
-    node.last.next = node.next
-
+    # could make a helper func here to clean up pointers but maybe later
+    if node.next != None:
+        node.next.last = node.last
+    if node.last != None:
+        node.last.next = node.next
+    node.last = None
+    node.next = None
+    
+'''
 nodly1 = DoublyNode('a')
 nodly2 = DoublyNode('b')
 nodly3 = DoublyNode('c')
 nodly4 = DoublyNode('d')
 connectDNodes([nodly1,nodly2,nodly3,nodly4])
 
-#testing that the doubly linked list is working
-
-#remKNode(nodly4,1)
-
+nodly4.traverse(False)
+remKNode(nodly4,0)
+print('after')
+nodly3.traverse(False)
+'''
 # delete a node from linked list
 
 # add two linked lists from left to right

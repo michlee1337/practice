@@ -162,6 +162,17 @@ get kth to last element from a linked list
 this would probs be easier with a doubly linked list.
 or if we knew the length of a linked list through a linked list class
 lets do doubly
+
+
+Methods
+
+1. Use length of linked list
+- calculate length and then find nth node
+Time = O(2n); Space = O(1)
+
+2. 2 pointers
+- move P1 n nodes from head, move both until P1 hits end, return P2
+Time = O(n); Space = O(2)
 '''
 
 def remKNode(nodeEnd,k):
@@ -175,7 +186,7 @@ def remKNode(nodeEnd,k):
         node.last.next = node.next
     node.last = None
     node.next = None
-    
+
 '''
 nodly1 = DoublyNode('a')
 nodly2 = DoublyNode('b')

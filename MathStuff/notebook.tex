@@ -141,7 +141,7 @@
     \def\gt{>}
     \def\lt{<}
     % Document parameters
-    \title{Calculus\_A4}
+    \title{Calculus\_A5}
     
     
     
@@ -280,347 +280,541 @@
     
 
     
-    \section{Michelle}\label{michelle}
-
-\subsection{Assignment 4}\label{assignment-4}
-
-\subsection{CS111A Fall 2018}\label{cs111a-fall-2018}
-
-    \subsection{Part A}\label{part-a}
-
-\subsubsection{A.1}\label{a.1}
-
-In the late 1860s, Adolf Fick, a professor of physiology in the Faculty
-of Medicine in W ̈urzberg, Germany, developed one of the methods we use
-today for measuring how much blood your heart pumps in a minute. Your
-cardiac output as you read this sentence is probably about 7 L/min. At
-rest it is likely to be a bit under 6 L/min. If you are a trained
-marathon runner running a marathon, your cardiac output can be as high
-as 30 L/min. Your cardiac output can be calculated with the formula
-
-\[y = \frac{Q}{D}\]
-
-where \(Q\) is the number of milliliters of CO2 you exhale in a minute
-and \(D\) is the difference between the CO2 concentration (ml/L) in the
-blood pumped to the lungs and the CO2 concentration in the blood
-returning from the lungs. With \(Q = 233 ml/min\) and
-\(D = 97 − 56 = 41 ml/L\), \(y = 233 ml/min/ 41 ml/L ≈ 5.68 L/min\),
-fairly close to the 6 L/min that most people have at basal (resting)
-conditions. (Data courtesy of J. Kenneth Herd, M.D., Quillan College of
-Medicine.) Suppose that when \(Q = 233\) and \(D = 41\), we also know
-that \(D\) is decreasing at the rate of 2 units a minute but that \(Q\)
-remains unchanged. What is happening to the cardiac output?
-
-    Objective function:\\
-\[y = \frac{Q}{D}\]
-
-Other information:\\
-When \(Q = 233\) and \(D = 41\)\\
-\(\frac{\delta D}{\delta T} = 2\)\\
-\(\frac{\delta Q}{\delta T} = 0\)
-
-What's happening to y?
-
-\(\frac{\delta Y}{\delta T} = \frac{\frac{\delta Q}{\delta T}*D - Q*\frac{\delta D}{}}{D^2}\)
-\#quotient rule
-
-\(\frac{\delta Y}{\delta T} = (0*41 - 233*2)/41^2\)
-\[\frac{\delta Y}{\delta T} = -466/1681\]
-
-    \subsubsection{A.2}\label{a.2}
-
-Suppose that a scientist has reason to believe that two quantities \(x\)
-and \(y\) are related linearly, that is \(y = mx + b\), at least
-approximately, for some values of \(m\) and \(b\). The scientist
-performs an experiment and collects data in the form of points
-\((x_1, y_1)\), \((x_2, y_2)\), ... ,\((x_n, y_n)\), and then plots
-these points. The points don't lie exactly on a straight line, so the
-scientist wants to find constants \(m\) and \(b\) so that the line
-\(y = mx + b\) ``fits'' the points as well as possible.
-
-Let \(d_i = y_i − (mx_i + b)\) be the vertical deviation of the point
-\((x_i, y_i)\) from the line. The method of least squares determines
-\(m\) and \(b\) so as to minimize \(\sum_{i=1}^{n} d^2_i\), the sum of
-the squares of these vertical deviations. Show that, according to this
-method,the line of best fit is obtained when m and b satisfy the
-following system of equations:
-
-\[m\sum_{i=1}^{n} x_i + bn = \sum_{i=1}^{n}y_i\]
-\[m\sum_{i=1}^{n} x^2_i + b\sum_{i=1}^{n}x_i = \sum_{i=1}^{n}x_iy_i\]
-
-    Line of best fit is when sum of squared errors
-(\(\sum_{i=1}^{n} d^2_i\)) is minimized
-
-\emph{Let} \(f(x) = \sum_{i=1}^{n} d^2_i\)
-
-\emph{substitute in the formula for} \(d_i\)\\
-\(f(x) = \sum_{i=1}^{n} ( (y_i − (mx_i + b))^2)\)\\
-\emph{simplify} \(f(x) = \sum_{i=1}^{n} (y_i − mx_i - b)^2\)
-
-    The sum of squared errors is minimized at a critical point within the
-graph (when the instantaneous rate of change of the objective function
-along any variable is 0).
-
-Objective function:\\
-\[f(x) = \sum_{i=1}^{n} (y_i − mx_i - b)^2\]
-
-Variables: \[m\] \[b\]
-
-The instantaneous rate of change of the objective function along any
-variable is 0 when the partial derivatives are equal to 0.
-
-\emph{partial derivative by m:}\\
-\(\frac{\delta f}{\delta m} =\sum_{i=1}^{n} 2(y_i − mx_i - b)*-x_i\)
-\#chain rule\\
-\(\frac{\delta f}{\delta m} =-2\sum_{i=1}^{n}(y_i − mx_i - b)*x_i\)
-\#rearrange\\
-\emph{critical point when derivative = 0}\\
-\(0 =-2\sum_{i=1}^{n}(y_i − mx_i - b)*x_i\)\\
-\(0 =\sum_{i=1}^{n}(y_i − mx_i - b)*x_i\)\\
-\(0 =\sum_{i=1}^{n}(x_iy_i − mx_i^2 - bx_i)\) \#expand\\
-\(m\sum_{i=1}^{n}x_i^2 + b\sum_{i=1}^{n}x_i = \sum_{i=1}^{n}x_iy_i\)
-\#expand and rearrange
-
-\emph{partial derivative by b:}\\
-\(\frac{\delta f}{\delta b} = \sum_{i=1}^{n} 2(y_i − mx_i - b)*-1\)
-\#chain rule\\
-\(\frac{\delta f}{\delta b} = -2\sum_{i=1}^{n}(y_i − mx_i - b)\)
-\#rearrange\\
-\emph{critical point when derivative = 0:}\\
-\(0 = -2\sum_{i=1}^{n}(y_i − mx_i - b)\)\\
-\(0 = \sum_{i=1}^{n}(y_i − mx_i - b)\)\\
-\(0 = \sum_{i=1}^{n}y_i − m\sum_{i=1}^{n}x_i - \sum_{i=1}^{n}b)\)
-\#expand\\
-\(m\sum_{i=1}^{n}x_i + bn = \sum_{i=1}^{n}y_i\) \#rearrange
-
-The partial derivatives of the objective function is 0 when \(m\) and
-\(b\) satisfy the following equations:\\
-\[m\sum_{i=1}^{n}x_i^2 + b\sum_{i=1}^{n}x_i = \sum_{i=1}^{n}x_iy_i\]
-\[m\sum_{i=1}^{n}x_i + bn = \sum_{i=1}^{n}y_i\]
-
-    \textbf{Testing if it's min}
-
-\(\frac{\delta f}{\delta m} =-2\sum_{i=1}^{n}(y_i − mx_i - b)*x_i\)\\
-\(\frac{\delta f}{\delta m} =-2\sum_{i=1}^{n}(y_ix_i − mx_i^2 - bx_i)\)
-\#expand\\
-\(\frac{\delta f^2}{\delta m^2} =4\sum_{i=1}^{n}x_i\)
-
-\(\frac{\delta f}{\delta b} = -2\sum_{i=1}^{n}(y_i − mx_i - b)\)\\
-\(\frac{\delta f}{\delta b} = -2(\sum_{i=1}^{n}y_i − \sum_{i=1}^{n}mx_i - nb)\)\\
-\(\frac{\delta f^2}{\delta b^2} = 2n\)
-
-\emph{We can assume that n will be positive (number of datapoints
-\textgreater{} 0) but we cannot assume that the sum of all x values will
-be positive. The sum of x values will not be testable since it will
-depend on the dataset.}
-
-\emph{Algebraic proof will be far beyond the scope of this course}
-
-\emph{That said, since the function \(f(x) = \sum_{i=1}^{n} d^2_i\) is a
-squared quadratic function, the equation will be a concave up function.
-Hence, the only critical point should be a min point. Thus we can safely
-assume that this is a min point.}
-
-    \subsection{Part B}\label{part-b}
-
-\subsubsection{B.1}\label{b.1}
-
-Airlines want to maximize profits with every flight. Since cargo is
-expensive to fly, airlines are now charging baggage fees. With baggage
-fees, customers are less likely to take big bags with them, giving less
-of a profit to the airline. Let's model a specific example:
-
-\begin{enumerate}
-\def\labelenumi{(\alph{enumi})}
-\tightlist
-\item
-  Airlines noticed that if they charge \$20 for each bag, then in a
-  given flight, 50 bags will be checked. They also noticed that for
-  every \$2 increase in the baggage fee, 2 fewer bags will be checked
-  in. How can we model the revenue due to checked bags as a function of
-  the number of price increases x? What are the constraints on the value
-  of x?
-\end{enumerate}
-
-    \textbf{Revenue due to checked bags}\\
-Objective function:\\
-\(revenue = number.of.bags * (20+2x)\)\\
-\emph{number of bags is a dependent variable on price}\\
-\(r(p) = B(x)*(20+2x)\)
-
-\(B(x) = a - x\) \#where a is an unknown\\
-\emph{sub in the variable values we were given to find unknown: 50 bags
-when \$20 charged}\\
-\(50 = a -20\)\\
-\(a = 70\)\\
-\emph{sub the value of a back into function}\\
-\(B(p) = 70 - x\)
-
-Sub the function for number of bags back into the overall objective
-function\\
-\(r(p) = (70 - x)*(20+2x)\)
-
-\textbf{What are the constraints?}\\
-There will likely be a constraint on the maximal number of bags that can
-be fit in the plane (max value of \(B(p)\)).
-
-    \begin{enumerate}
-\def\labelenumi{(\alph{enumi})}
-\setcounter{enumi}{1}
-\tightlist
-\item
-  There are also some costs associated with carrying bags. This specific
-  company noticed that the cost of checking N bags is equal to\\
-  \[C(N) = \frac{N^2}{20} + 7N\]
-\end{enumerate}
-
-Write a function that describes the profit from checked bags in terms of
-the number of price increases x.
-
-    \(r(p) = (70 - x)*(20+2x) - (\frac{N^2}{20} + 7N)\)
-
-\emph{replace N with the function for number of bags}
-
-\(r(p) = (70 - x)*(20+2x) - (\frac{(70-x)^2}{20} + 7(70-x))\)\\
-\(r(p) = (70 - x)*(20+2x) - 7(70-x) - \frac{(70-x)^2}{20}\)
-
-    \begin{enumerate}
-\def\labelenumi{(\alph{enumi})}
-\setcounter{enumi}{2}
-\tightlist
-\item
-  Find the number of price increases x that will maximize this company's
-  profits. What will be the optimal baggage fee? How many bags will be
-  taken on the flight?
-\end{enumerate}
-
-    \textbf{Find Maximal Point}\\
-\(r(p) = (70 - x)*(20+2x) - 7(70-x) - \frac{(70-x)^2}{20}\)
-
-\textbf{Find critical points (instantaneous rate of change = 0)}
-
-\(\frac {\delta r}{\delta x}\)\\
-\(= \frac {\delta}{\delta x}[(70-x)(2x+20)] - 7(\frac {\delta}{\delta x}[70-x] - \frac{1}{20}\frac {\delta}{\delta x}[(70-x)^2])\)\\
-\(= -1(2x+20)+2(70-x)-7(-1)-\frac{1}{20}2(70-x)(-1)\)\\
-\(= -1(2x+20)+2(70-x)+7-\frac{x-70}{10}\)\\
-\(= -2x-20+140-2x+7-\frac{x-70}{10}\)\\
-\(= -4x+127-\frac{x-70}{10}\)\\
-\(= -\frac{41x-1340}{10}\)
-
-\emph{equate to 0}\\
-\(0 = -\frac{41x-1340}{10}\)\\
-\(0 = 41x-1340\)\\
-\(41x=1340\)\\
-\(x=\frac{1340}{41}\)
-
-\textbf{Check that it is a maximal point}
-\(\frac {\delta r}{\delta x}= -\frac{41x-1340}{10}\)\\
-\(\frac {\delta r}{\delta x}= -\frac{1}{10}41x-1340\)
-
-\(\frac {\delta r^2}{\delta x^2} = -\frac{1}{10}\frac{\delta}{\delta x}[41x-1340]\)\\
-\(\frac {\delta r^2}{\delta x^2} = -\frac{1}{10}41\)\\
-\(\frac {\delta r^2}{\delta x^2} = -\frac{41}{10}\)
-\({\delta r^2}{\delta x^2} < 0\)\\
-\emph{:. Hence this is a maximal point}
-
-\textbf{Optimal Baggage Fee}\\
-\(=\frac{1340}{41}\)
-
-\textbf{How many bags will be on this flight?}\\
-\(B(p) = 70 - (\frac{1340}{41})\)\\
-\(B(p) = 70 - 37.32\)\\
-\emph{round down}\\
-\(= 37\)
-
-    \subsubsection{B.2}\label{b.2}
-
-Three alleles (alternative versions of a gene) A,B, and O determine the
-four blood types A (AA or AO), B (BB or BO), O (OO), and AB. The
-Hardy-Weinberg Law states that the proportion of individuals in a
-population who carry two different allelles is
-
-\[P = 2pq + 2pr + 2rq\]
-
-where p, q, and r are the proportions of A, B, and O in the population.
-Use the fact that \(p + q + r = 1\) to determine the maximal value P can
-take.
-
-    \textbf{Objective Function O(p,q,r)}\\
-\(P(p,q,r) = 2pq + 2pr + 2rq\)
-
-\textbf{Constraint Function C(p,q,r)}\\
-\(p+q+r=1\)
-
-\textbf{Find Maximum}\\
-\emph{use Lagrange Multipliers}
-
-\textbf{Find Critical Points}
-
-\emph{find derivatives of all 3 factors in both objective and constraint
-function{[}s{]}}\\
-\(\frac{\delta P}{\delta p} = 2q + 2r\)\\
-\(\frac{\delta P}{\delta q} = 2p + 2r\)\\
-\(\frac{\delta P}{\delta r} = 2p + 2q\)
-
-\(\frac{\delta C}{\delta p} =1\)\\
-\(\frac{\delta C}{\delta q} =1\)\\
-\(\frac{\delta C}{\delta r} =1\)
-
-\emph{find equation set}\\
-A: \(2q + 2r = \lambda 1\)\\
-B: \(2p + 2r = \lambda 1\)\\
-C: \(2p + 2q = \lambda 1\)\\
-D: \(p+q+r=1\)
-
-\emph{find variable value combinations that satisfy the equation set}\\
-A-B:\\
-\(2q-2p = 0\)\\
-\(2q = 2p\)
-
-B-C:\\
-\(2r -2q = 0\)\\
-\(2r= 2q = 2p\)
-
-C-A:\\
-\(2p -2r = 0\)\\
-\(2p = 2r = 2q = 2p\)\\
-E: \(p = r = q = p\)
-
-\emph{sub into D}:\\
-\(p+p+p=1\)\\
-\(p=\frac{1}{3}\)
-
-\emph{sub into E}\\
-\(p = r = q = p = \frac{1}{3}\)
-
-\emph{sub values back into objective function}\\
-\(P(\frac{1}{3},\frac{1}{3},\frac{1}{3}) = 2\frac{1}{3}^2 + 2\frac{1}{3}^2 + 2\frac{1}{3}^2\)\\
-\(P(\frac{1}{3},\frac{1}{3},\frac{1}{3}) = \frac{6}{9}\)
-
-\emph{check any other point in the graph}\\
-Constraint: \(p+q+r=1\)\\
-\emph{a random set of variable values that satisfy the constraint}\\
-\(p = 1; q = 0; r = 0\)
-
-\(P(1,0,0) = 2(1)(0) + 2(1)(0) + 2(0)(0)\)\\
-\(P(1,0,0) = 0\)\\
-\(P(1,0,0) < P(\frac{1}{3},\frac{1}{3},\frac{1}{3})\)\\
-\emph{Since Lagrange Multipliers method ensures you get either the max
-or min point and there exists a point in the objective function that is
-lower than the point that the Lagrange method gave us, we can conclude
-that the point that Lagrange method gave us is not min, and therefore
-must be max.}
+    Assignment 5
+
+Michelle S Lee
+
+CS111A Fall 2018
+
+    \section{Part A}\label{part-a}
+
+\subsection{A.1 Handle the heat}\label{a.1-handle-the-heat}
+
+Let \(x\) be the length of east/west walls, \(y\) be the length of
+north/ south walls, and \(z\) the height of the building
+
+    \subsection{(a)}\label{a}
+
+\textbf{Setting up the functions and variables}
+
+Constraints \[x >= 30\] \[y >= 30\] \[z >= 4\] \[xyz = 400\]
+
+Objective function (to be minimized): \[f(x,y) = 20xz + 16yz + 6xy\]
+
+Constraint functions: \[x >= 30\] \[y >= 30\] \[z >= 4\] \[xyz = 4000\]
+
+\textbf{simplify by removing a variable from the equation}\\
+\(xyz = 4000\)\\
+\(z = \frac {4000}{xy}\)
+
+Subbing \(z = 400/xy\) into objective function:\\
+\[f(x,y) = 20x\frac {4000}{xy} + 16y\frac {4000}{xy} + 6xy\]
+\[= \frac {80000}{y} + \frac {64000}{x} + 6xy\]
+
+subbing \(z = 400/xy\) into constraint function:\\
+\(\frac {4000}{xy} >= 4\)\\
+\(\frac {1000}{y} >= x\)\\
+\(\frac {1000}{x} >= y\)
+
+simplified constraint:\\
+\[ 30 <= x <= \frac {1000}{y}\] \[30 <= y <= \frac {1000}{x}\]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} plotting constraints on a contour plot }
+         \PY{k+kn}{from} \PY{n+nn}{sage.plot.contour\PYZus{}plot} \PY{k+kn}{import} \PY{n}{ContourPlot}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib.cm}\PY{p}{;} \PY{n}{matplotlib}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{datad}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}
+         \PY{k+kn}{from} \PY{n+nn}{sage.plot.line} \PY{k+kn}{import} \PY{n}{Line}
+         \PY{n}{x}\PY{p}{,}\PY{n}{y} \PY{o}{=} \PY{n}{var}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x,y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{f}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)} \PY{o}{=} \PY{l+m+mi}{80000}\PY{o}{/}\PY{n}{y} \PY{o}{+} \PY{l+m+mi}{64000}\PY{o}{/}\PY{n}{x} \PY{o}{+} \PY{l+m+mi}{6}\PY{o}{*}\PY{n}{x}\PY{o}{*}\PY{n}{y}
+         \PY{n}{C} \PY{o}{=} \PY{n}{contour\PYZus{}plot}\PY{p}{(}\PY{n}{f}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{28}\PY{p}{,}\PY{l+m+mi}{35}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{25}\PY{p}{,}\PY{l+m+mi}{36}\PY{p}{)}\PY{p}{,}\PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Purples}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{colorbar}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,} \PY{n}{axes\PYZus{}labels}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}x\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}y\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{c1} \PY{o}{=} \PY{n}{line}\PY{p}{(}\PY{p}{[}\PY{p}{(}\PY{l+m+mi}{30}\PY{p}{,}\PY{l+m+mi}{25}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{30}\PY{p}{,}\PY{l+m+mi}{36}\PY{p}{)}\PY{p}{]}\PY{p}{,}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{red}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{c2} \PY{o}{=} \PY{n}{plot}\PY{p}{(}\PY{l+m+mi}{1000}\PY{o}{/}\PY{n}{x}\PY{p}{,}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{l+m+mi}{28}\PY{p}{,}\PY{l+m+mi}{35}\PY{p}{)}\PY{p}{,}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{c3} \PY{o}{=} \PY{n}{plot}\PY{p}{(}\PY{l+m+mi}{30}\PY{p}{,}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{l+m+mi}{28}\PY{p}{,}\PY{l+m+mi}{35}\PY{p}{)}\PY{p}{,}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{green}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{C}\PY{o}{+}\PY{n}{c1}\PY{o}{+}\PY{n}{c2}\PY{o}{+}\PY{n}{c3}
+\end{Verbatim}
+
+\texttt{\color{outcolor}Out[{\color{outcolor}14}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_3_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{c+c1}{\PYZsh{} plotting constraints with shading}
+         
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{plt}
+         
+         \PY{n}{x1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{)}
+         \PY{n}{y1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{full}\PY{p}{(}\PY{l+m+mi}{40}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{)}
+         
+         \PY{n}{x2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{full}\PY{p}{(}\PY{l+m+mi}{40}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{)}
+         \PY{n}{y2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x1}\PY{p}{,}\PY{n}{y1}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x2}\PY{p}{,}\PY{n}{y2}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x1}\PY{p}{,}\PY{l+m+mi}{1000}\PY{o}{/}\PY{n}{x1}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{40}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{40}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{fill\PYZus{}between}\PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{y1}\PY{p}{,} \PY{n}{facecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{fill\PYZus{}between}\PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{40}\PY{p}{,} \PY{n}{where}\PY{o}{=}\PY{n}{x1}\PY{o}{\PYZlt{}}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{,}\PY{n}{facecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yellow}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{fill\PYZus{}between}\PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{l+m+mi}{1000}\PY{o}{/}\PY{n}{x1}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{,}\PY{n}{facecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Constraints on Input Variables}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Length of East/West walls}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Length of North/South walls}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/opt/sagemath-8.3/local/lib/python2.7/site-packages/sage/repl/ipython\_kernel/\_\_main\_\_.py:13: RuntimeWarning: divide by zero encountered in divide
+/opt/sagemath-8.3/local/lib/python2.7/site-packages/sage/repl/ipython\_kernel/\_\_main\_\_.py:18: RuntimeWarning: divide by zero encountered in divide
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}44}]:} Text(0,0.5,u'Length of North/South walls')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_4_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{(b)}\label{b}
+
+    \textbf{Find Critical Points of Objective Function}\\
+Critical points are when the rate of change in any direction = 0
+
+Rate of change on the x axis:\\
+\(\frac{\delta f}{\delta x} = -64000x^-2 + 6y\)\\
+\emph{sub in rate of change = 0}\\
+\(6y = 64000x^-2\)\\
+\(y = \frac {32000}{3x^2}\)
+
+Rate of change on the y axis:\\
+\(\frac{\delta f}{\delta y} = -80000y^-2 + 6x\)\\
+\emph{sub in rate of change = 0}\\
+\(0 = -80000y^-2 + 6x\)\\
+\emph{sub in \(y = -\frac {32000}{3x^2}\)}\\
+\(0 = -80000(-\frac {32000}{3x^2})^-2 + 6x\)\\
+\(0 = -80000(-\frac {3x^2}{32000})^2 + 6x\)\\
+\(6x = 80000(\frac {9x^4}{1024000000})\)\\
+\(6x = (\frac {9x^4}{12800})\)\\
+\(x^3 = \frac{12800*6}{9}\)\\
+\(x =(\frac{25600}{3})^\frac{1}{3}\)\\
+\(x \approx 20.435\)
+
+Sub \(x \approx 20.435\) to find y:\\
+\(y = \frac {32000}{3(((\frac{25600}{3})^\frac{1}{3})^2}\)\\
+\(y = \frac {32000}{3(\frac{25600}{3})^\frac{2}{3}}\)\\
+\(y \approx 25.544\)
+
+Critical Point of objective function:\\
+\[(20.435,25.544)\]\\
+Citical point is not within constraints\\
+Thus we have to check the boundaries
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\textbf{Checking Boundary 1: \(x = 30\)}\\
+Endpoints of boundary 1 (\(y\) values): \([30,\frac{1000}{x}]\)\\
+Endpoints of boundary 1 (\(y\) values): \([30,\frac{1000}{30}]\)
+
+\[f(30,y) = \frac {80000}{y} + \frac {64000}{30} + 6(30)y\]\\
+\[f(30,y) = \frac {80000}{y} + \frac {6400}{3} + 180y\]
+
+\(\frac{\delta f}{\delta y} = 180-\frac {80000}{y^2}\)\\
+Critical Points for along \(x = 30\):\\
+\(0 = 180-\frac {80000}{y^2}\)\\
+\(\frac {80000}{y^2} = 180\)\\
+\(\frac {80000}{180} = y^2\)\\
+\(y = (\frac {80000}{180})^\frac {1}{2}\)\\
+\(y \approx 21.082\)
+
+Nature of Critical Point along \(x = 30\):\\
+\(\frac{\delta f^2}{\delta y^2} = 2\frac {80000}{y^3}\)\\
+Sub in \(y \approx 21.082\)\\
+\(\frac{\delta f^2}{\delta y^2} = 2\frac {80000}{21.082^3}\)\\
+\(\frac{\delta f^2}{\delta y^2} \approx 17.075\) at
+\(y \approx 21.082\)\\
+\(\frac{\delta f^2}{\delta y^2}\) at \(y \approx 21.082\) is positive,
+indicating a minimum point.
+
+Along the line \(x = 30\), there is only a minimum point at
+\(y \approx 21.082\). Since the minimmum point lies before the start
+point of boundary 1 and we know that there are no other critical points
+along \(x = 30\), we know that \(f(30,y)\) is an increasing function
+within the constraints of our boundary.\\
+Hence the minimum on this boundary is at \(y=30\) and maximum is at
+\(y=\frac {1000}{x} = \frac {1000}{30}\)\\
+\textbf{Minimum:}\\
+\[f(30,30) = \frac {80000}{30} + \frac {64000}{30} + 6(30)(30)\]\\
+\[f(30,30) \approx 10200\]\\
+\textbf{Maximum:}\\
+\[f(30,\frac {1000}{30}) = \frac {80000}{\frac {1000}{30}} + \frac {64000}{30} + 6(30)(\frac {1000}{30})\]\\
+\[f(30,\frac {1000}{30}) \approx 10533\]\\
+\_\_\_\_\_\_\_\_
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\textbf{Checking Boundary 2: \(y = 30\)}\\
+Endpoints of boundary 2 (\(x\) values): \([30,\frac{1000}{y}]\)\\
+Endpoints of boundary 2 (\(x\) values): \([30,\frac{1000}{30}]\)
+
+\[f(x,30) = \frac {80000}{30} + \frac {64000}{x} + 6x(30)\]\\
+\[f(x,30) = \frac {80000}{30} + \frac {64000}{x} + 180x\]
+
+\(\frac{\delta f}{\delta x} = 180-\frac {64000}{x^2}\)\\
+Critical Points for Boundary 2:\\
+\(0 = 180-\frac {64000}{x^2}\)\\
+\(\frac {64000}{x^2} = 180\)\\
+\(\frac {64000}{180} = x^2\)\\
+\(x = (\frac {64000}{180})^\frac{1}{2}\)\\
+\(x \approx 18.856\)
+
+Nature of Critical Point on Boundary 2:\\
+\(\frac{\delta f^2}{\delta x^2} = 2\frac {64000}{x^3}\)\\
+\(\frac{\delta f^2}{\delta x^2} \approx 0.210\) at
+\(x \approx 18.856\)\\
+\(\frac{\delta f^2}{\delta x^2}\) is positive, indicating a minimum
+point.
+
+Along the line \(y = 30\) , there is only a minimum point at
+\(x \approx 18.856\). Since the minimmum point lies before the start
+point of boundary 2 and we know that there are no other critical points
+along \(y = 30\), we know that \(f(x,30)\) is an increasing function
+within the constraints of our boundary.
+
+Hence the minimum on this boundary is at \(x=30\) and maximum is at
+\(x=\frac {1000}{y} = \frac {1000}{30}\)
+
+\textbf{Minimum:}\\
+\[f(30,30) = \frac {80000}{30} + \frac {64000}{30} + 6(30)(30)\]\\
+\[f(30,30) \approx 10200\]\\
+\textbf{Maximum:}\\
+\[f(30,\frac {1000}{30}) = \frac {80000}{\frac {1000}{30}} + \frac {64000}{30} + 6(30)(\frac {1000}{30})\]\\
+\[f(30,\frac {1000}{30}) \approx 10533\]\\
+\_\_\_\_\_\_\_\_
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\textbf{Checking Boundary 3: \(x = \frac{1000}{y}\)}\\
+Endpoints of boundary 3 (\(y\) values): \([30,\frac{1000}{x}]\)\\
+Endpoints of boundary 3 (\(y\) values): \([30,\frac{1000}{30}]\)
+
+\[f(\frac{1000}{y},y) = \frac {80000}{y} + \frac {64000}{\frac{1000}{y}} + 6(\frac{1000}{y})y\]\\
+\[f(\frac{1000}{y},y) = \frac {80000}{y} + 64y + 6000\]
+
+\(\frac{\delta f}{\delta y} = 64-\frac{80000}{y^2}\)\\
+Critical Points for Boundary 3:\\
+\(0 = 64-\frac{80000}{y^2}\)\\
+\(\frac{80000}{y^2} = 64\)\\
+\(\frac{80000}{64} = y^2\)\\
+\(y = (\frac{80000}{64})^\frac{1}{2}\)\\
+\(y \approx 35.355\)
+
+Nature of Critical Point on Boundary 3:\\
+\(\frac{\delta f^2}{\delta y^2} = 2\frac {80000}{y^3}\)\\
+\(\frac{\delta f^2}{\delta x^2} \approx 1.105\) at
+\(y \approx 35.355\)\\
+\(\frac{\delta f^2}{\delta x^2}\) is positive, indicating a minimum
+point.
+
+Along the line \(x = \frac{1000}{y}\), there is only a minimum point at
+\(x \approx 18.856\). Since the minimmum point lies after the ending
+point of boundary 3 and we know that there are no other critical points
+along \(x = \frac{1000}{y}\), we know that \(f(\frac{1000}{y},y)\) is an
+increasing function within the constraints of our boundary.
+
+Hence the minimum on this boundary is at \(x=30\) and maximum is at
+\(x=\frac {1000}{y} = \frac {1000}{30}\)
+
+\textbf{Minimum:}\\
+\[f(30,30) = \frac {80000}{30} + \frac {64000}{30} + 6(30)(30)\]\\
+\[f(30,30) \approx 10200\]\\
+\textbf{Maximum:}\\
+\[f(30,\frac {1000}{30}) = \frac {80000}{\frac {1000}{30}} + \frac {64000}{30} + 6(30)(\frac {1000}{30})\]\\
+\[f(30,\frac {1000}{30}) \approx 10533\]\\
+\_\_\_\_\_\_\_\_
+
+\(\frac{\delta f}{\delta x}\)is negative for any value between 30 to
+\(\frac{1000}{30}\). Thus \(f(\frac{1000}{y},y)\) is a decreasing
+function within the constraint.
+
+Hence the minimum on this boundary is at \(y=\frac {1000}{30}\) and
+maximum is at \(y=30\)\\
+\emph{Minimum: }\\
+\(f(\frac{1000}{\frac {1000}{30}},\frac {1000}{30}) = \frac {80000}{\frac {1000}{30}} + 64\frac {1000}{30} + 6000\)\\
+\(f(\frac{1000}{\frac {1000}{30}},\frac {1000}{30}) \approx 10533\)\\
+\emph{Maximum: }\\
+\(f(\frac{1000}{30},30) = \frac {80000}{30} + 64(30) + 6000\)\\
+\(f(\frac{1000}{30},30) \approx 10587\)
+
+    The absolute minimum of this function is 10200 \(\frac {units}{m^2}\) of
+heat loss.\\
+This is achieved when\\
+\[x = 30\]\\
+\[y=30\]\\
+\[z = \frac {4000}{xy} = \frac {40}{9}\]
+
+    \subsection{(c)}\label{c}
+
+Yes. in question (a) we found that the minimum point on the objective
+function (without any constraints) is when \[(x,y) = (20.435,25.544)\]
+
+At this minimum point, we would have the following variable values:\\
+\[x = 20.435\]\\
+\[y = 25.544\]\\
+\[z = \frac {4000}{(20.435)(25.544)} \approx 7.663\]
+
+The heatloss with these variables would be:\\
+\[f(20.435,25.544) = 20(20.435)(\frac {4000}{(20.435)(25.544)}) + 16(25.544)(\frac {4000}{(20.435)(25.544)}) + 6(20.435)(25.544)\]
+\[\approx 9395.682\]
+
+    \subsection{A.2 Handle the heat}\label{a.2-handle-the-heat}
+
+Objective function (to be maximized):\\
+\[f(x,y) = 2x+3y\]
+
+Constraint function:\\
+\[c(x,y) = \sqrt{x} + \sqrt{y} = 5\]
+
+    \subsection{(a)}\label{a}
+
+Differentiate Objective function by all variables\\
+\(\frac{\delta f}{\delta x} = 2\)\\
+\(\frac{\delta f}{\delta y} = 3\)
+
+Differentiate Constraint function by all variables\\
+\(\frac{\delta c}{\delta x} = \frac{1}{2\sqrt{x}}\)\\
+\(\frac{\delta c}{\delta y} = \frac{1}{2\sqrt{y}}\)
+
+Find the set of equations for stationary points along those variables:\\
+Along the x axis:\\
+\(\frac{\delta f}{\delta x} = \lambda \frac{\delta c}{\delta x}\)\\
+\(2 = \lambda \frac{1}{2\sqrt{x}}\)\\
+\(2 = \frac{\lambda}{2\sqrt{x}}\)\\
+Along the y axis:\\
+\(\frac{\delta f}{\delta y} = \lambda \frac{\delta c}{\delta y}\)\\
+\(3 = \lambda \frac{1}{2\sqrt{y}}\)\\
+\(3 = \frac{\lambda}{2\sqrt{y}}\)
+
+Find the set(s) of variables that are stationary points within the
+constraints:\\
+\(2 = \lambda \frac{1}{2\sqrt{x}}\)\\
+\(3 = \lambda \frac{1}{2\sqrt{y}}\)\\
+\(\sqrt{x} + \sqrt{y} = 5\)
+
+Eq1: \(2 = \lambda \frac{1}{2\sqrt{x}}\)\\
+Eq2: \(3 = \lambda \frac{1}{2\sqrt{y}}\)\\
+Eq3: \(\sqrt{x} + \sqrt{y} = 5\)
+
+Rearrage Eq 3 to define one variable by the other\\
+\(\sqrt{x} + \sqrt{y} = 5\)\\
+\(\sqrt{x} = 5 - \sqrt{y}\)\\
+\(x = (5 - \sqrt{y})^2\)\\
+\(x = 25 - 10\sqrt{y} + y\)
+
+Sub \(x = 25 - 10\sqrt{y} + y\) into Eq1\\
+\(2 = \frac{\lambda}{2\sqrt{25 - 10\sqrt{y} + y}}\)\\
+\(\lambda= 2*2\sqrt{25 - 10\sqrt{y} + y}\)\\
+\(\lambda= 4\sqrt{25 - 10\sqrt{y} + y}\)
+
+Rearrange Eq 2 to define it by \(\lambda\)\\
+\(3 = \frac{\lambda}{2\sqrt{y}}\)\\
+\(\lambda = 6\sqrt{y}\)
+
+Equate the two equations we have for \(\lambda\) (Eq1 and Eq2)\\
+\(6\sqrt{y} = 4\sqrt{25 - 10\sqrt{y} + y}\)
+
+    \(36y= 400-160\sqrt{y}+16y\)\\
+\(160\sqrt{y} = 400+16y-36y\)\\
+\(160\sqrt{y} = 400-20y\)\\
+\(25600y = 160000-16000y + 400y^2\)\\
+\(400y^2 - 41600y + 160000 = 0\)
+
+Use the Roots of Quadratic Equations formula\\
+\(y = \frac {- (-41600)+\sqrt{(-41600)^2-4*400*160000}}{2*400}\)\\
+\(y = \frac {41600+\sqrt{41600^2-256000000}}{800}\)\\
+\(y = 100\)\\
+Check if the root is real by subbing \(y = 100\) into the original
+function \(6\sqrt{100} = 4\sqrt{25 - 10\sqrt{100} + 100}\)\\
+\(60 = 20\) which is False.\\
+Hence this is not a real root.
+
+\(y = \frac {- (-41600)-\sqrt{(-41600)^2-4*400*160000}}{2*400}\)\\
+\(y = \frac {41600-\sqrt{41600^2-256000000}}{800}\)\\
+\(y = 4\)\\
+Check if the root is real by subbing \(y = 100\) into the original
+function.\\
+\(6\sqrt{4} = 4\sqrt{25 - 10\sqrt{4} + 4}\)\\
+\(12 = 12\) which is True.\\
+Hence this is a real root.
+
+Thus the only real root is \(y = 4\)
+
+Sub \(y = 4\) into Eq3 to find \(x\)\\
+\(\sqrt{x} + \sqrt{4} = 5\)\\
+\(x = (5 - 2)^2\)\\
+\(x = 9\)
+
+Thus the maximum value of \(f(x,y) is f(9,4)\)\\
+\(f(9,4) = 2(9) + 3(4)\)\\
+\(f(9,4) = 30\)
+
+    \subsection{(b)}\label{b}
+
+\(f(25,0) = 2(25) + 3(0)\)\\
+\(f(25,0) = 50\)
+
+\(f(25,0)\) does give us a larger value than the "maximum point" we
+found in part (a), meaning that Lagrange method of finding maximum point
+failed to work.
+
+    \subsection{(c)}\label{c}
+
+Rearrange the constraint function to plot it.\\
+\(\sqrt{x} + \sqrt{y} = 5\)
+
+\(y = (5-\sqrt{x})^2\)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{c+c1}{\PYZsh{} plotting constraints on a contour plot }
+         \PY{k+kn}{from} \PY{n+nn}{sage.plot.contour\PYZus{}plot} \PY{k+kn}{import} \PY{n}{ContourPlot}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib.cm}\PY{p}{;} \PY{n}{matplotlib}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{datad}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}
+         \PY{k+kn}{from} \PY{n+nn}{sage.plot.line} \PY{k+kn}{import} \PY{n}{Line}
+         \PY{n}{x}\PY{p}{,}\PY{n}{y} \PY{o}{=} \PY{n}{var}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x,y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{f}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)} \PY{o}{=}  \PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{x}\PY{p}{)}\PY{o}{+}\PY{p}{(}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{y}\PY{p}{)}
+         \PY{n}{C} \PY{o}{=} \PY{n}{contour\PYZus{}plot}\PY{p}{(}\PY{n}{f}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{)}\PY{p}{,}\PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Purples}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{colorbar}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,} \PY{n}{axes\PYZus{}labels}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}x\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}y\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{F} \PY{o}{=} \PY{n}{plot}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{5}\PY{o}{\PYZhy{}}\PY{n}{sqrt}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m+mi}{2}\PY{p}{,}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{)}\PY{p}{,}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{green}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{P}\PY{o}{=}\PY{n}{point}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{9}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{markeredgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{,}\PY{n}{zorder}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+         \PY{n}{C}\PY{o}{+}\PY{n}{F}\PY{o}{+}\PY{n}{P}
+\end{Verbatim}
+
+\texttt{\color{outcolor}Out[{\color{outcolor}38}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    Lagrange fails to solve the problem because the actual minimum of the
+function occurs at \((25,0)\).
+
+The point \(f(9,4)\) is actually a minimum point, not a maximum point.
+Lagrange multipliers method gives us all the critical points (when the
+rate of change of the objective function along the constraint path is 0)
+within a range but since the function within this range only has one
+critical point which is a minimum point, we cannot find the maximum
+using lagrange. We instead have to separately check the endpoints.
+
+Additionally at \((25,0)\), the partial derivative of the constraint
+function by \(y\) (\(\frac{\delta c}{\delta x}\)) does not exist since
+division by 0 is undefined. Thus, the point \((25,0)\) is not in the
+domain of the functions on which we apply Lagrange multipliers,
+excluding that point from consideration when evaluating maximum points.
+
+    \section{Part B}\label{part-b}
+
+\subsection{B.1}\label{b.1}
+
+Let \(x\) be aluminum, \(y\) be iron, and \(z\) be magnesium.
+
+Objective function (to be minimized):\\
+\[f(x,y,z) = 6x+4y+8z\]
+
+Constraint function:\\
+\[C(x,y,z) = xyz = 1000\]
+
+    Derive the objective function\\
+\(\frac{\delta f}{\delta x} = 6\)\\
+\(\frac{\delta f}{\delta y} = 4\)\\
+\(\frac{\delta f}{\delta z} = 8\)
+
+Derive the constraint function\\
+\(\frac{\delta f}{\delta x} = yz\)\\
+\(\frac{\delta f}{\delta y} = xz\)\\
+\(\frac{\delta f}{\delta z} = xy\)
+
+Find the set of equations for stationary points along all of those
+variables\\
+\(6 = \lambda yz\)\\
+\(4 = \lambda xz\)\\
+\(8 = \lambda xy\)
+
+Solve for the set(s) of variables where those there is stationary points
+along all of those variables and is within the constraints\\
+Eq1: \(6 = \lambda yz\)\\
+Eq2: \(4 = \lambda xz\)\\
+Eq3: \(8 = \lambda xy\)\\
+Eq4: \(xyz = 1000\)
+
+    \textbf{Redefine all variables by x}\\
+Rearrange Eq1 and Eq 2 to make them equate \(\lambda\)\\
+\(\lambda = \frac{6}{yz}\)\\
+\(\lambda = \frac{4}{xz}\)\\
+Equate the two \(\lambda\) functions\\
+\(\frac{6}{yz} = \frac{4}{xz}\)\\
+\(4yz = 6xz\)\\
+\(y = \frac{6x}{4}\)
+
+Rearrange Eq1 and Eq 3 to make them equate \(\lambda\)\\
+\(\lambda = \frac{6}{yz}\)\\
+\(\lambda = \frac{8}{xy}\)\\
+Equate the two \(\lambda\) functions\\
+\(\frac{6}{yz} = \frac{8}{xy}\)\\
+\(6xy = 8yz\)\\
+\(z = \frac{6x}{8}\)
+
+\textbf{Solve for x by subbing all variables with their definitions by x
+into Eq4}\\
+\(x(\frac{6x}{4})(\frac{6x}{8}) = 1000\)\\
+\(\frac{36x^3}{32} = 1000\)\\
+\(x = \frac{8000}{9}^\frac{1}{3}\)\\
+\(x \approx 9.615\)
+
+\textbf{Solve for the other variables using their definitions by x}\\
+\(y = \frac{6(\frac{8000}{9}^\frac{1}{3})}{4}\)\\
+\(y \approx 14.422\)
+
+\(z = \frac{6(\frac{8000}{9}^\frac{1}{3})}{8}\)\\
+\(z \approx 7.211\)
+
+\textbf{Cost of producing 1000 widgets}\\
+\(f(9.615,14.422,7.211) = 6(9.615)+4(14.422)+8(7.211) = 173.066\)
+
+\textbf{Checking the nature of the minimum point}\\
+\((1000,1,1)\) satisfies the constraint\\
+\[f(1000,1,1) = 6(1000)+4(1)+8(1) = 6012\]
+
+Since Lagrange Multipliers Method always returns all critical points on
+the function within the constraints, the method only returned one
+critical point, we can deduce that the critical point is a minimum point
+since there exists another point on the function within the constraints
+that has a cost that is higher than the cost of that point.
+
+Tons of aluminium, iron, and magnesium that would produce 1000 widgets
+at the lowest cost:\\
+\[x \approx 9.615\]\\
+\[y \approx 14.422\]\\
+\[z \approx 7.211\]
+
+Cost: \[f(9.615,14.422,7.211) = 173.066\]
 
     \section{Appendix}\label{appendix}
 
-\textbf{\#deduction: } In situations where algebraic proof would have
-been unnecessarily complex, I used deduction on mathematical laws to
-prove min and max points. Most notably in A2 and B2.
-
-\textbf{\#testability: } In question A2, I identified when specific
-lines of proof would not be testable (by nature of the question or the
-material covered in the course) and identified an alternative way to
-prove the question.
+\textbf{\#deduction:} For all qualitative proof, I wrote explicit
+deductive steps to derive the proof from axioms of the mathematical
+theorems.\\
+\textbf{\#variables:} I explicitly stated the variable assignments and
+how I manipulated them to answer the questions.\\
+\textbf{\#decision seletcion:} In B1 I used external representation of
+the problem by plotting the obstacle and constraint functions as well as
+the points that we were interested in. In doing so, I was very quickly
+and intuitively able to understand the general overview of what was
+going on with the function and the path.
 
 
     % Add a bibliography block to the postdoc

@@ -27,19 +27,49 @@ class Node:
         while node != None:
             print(node.val)
             node = node.next
+        return(0)
 
-node1 = Node(12)
-node2 = Node(7)
+def connectNodes(arr):
+    for i in range(len(arr[0:-1])):
+        arr[i].next = arr[i+1]
+    return(0)
 
-node1.next = node2
+# by index
+def delNode(node,int):
+    # only works for singly linked lists
+    if int == 0:
+        node.next = None
+    else:
+        for i in range(int-1):
+            node = node.next
+        if node.next.next != None:
+            node.next = node.next.next
+        else:
+            node.next = None
+    return(0)
 
-# print(node1)
-# node1.traverse()
+# testing
+'''
+n1 = Node('a')
+n2 = Node('b')
+n3 = Node('c')
+n4 = Node('d')
 
+connectNodes([n1,n2,n3,n4])
+
+print('b4')
+n1.traverse()
+
+print('after')
+delNode(n1,1)
+n1.traverse()
+'''
+
+#_________________DOUBLY LINKED LISTS___________
 '''
 Doubly Linked list
 
-Advatages
+Advantages
 - traverse in both dir
 - constant time in accessing (insert/delete) end node
 
@@ -53,6 +83,7 @@ class DoublyNode:
         self.val = var
         self.next = None
         self.last = None
+
     def traverse(self,forward = True):
         node = self
         while node != None:
@@ -61,41 +92,65 @@ class DoublyNode:
                 node = node.next
             else:
                 node = node.last
+        return(0)
 
-def connectNodes(arr):
+def connectDNodes(arr):
     arr[0].next = arr[1]
     for i in arr[1:-1]:
         arr[i].next = arr[i+1]
         arr[i+1].last = arr[i]
     arr[len(arr)-1].last = arr[len(arr)-2]
+    return(0)
 
 nodly1 = DoublyNode(31)
 nodly2 = DoublyNode(7)
 
-connectNodes([nodly1,nodly2])
+connectDNodes([nodly1,nodly2])
 
+'''
+#testing
 nodly1.traverse()
 nodly2.traverse(False)
-
-'''
- Challenges
 '''
 
-# traverse linked list
+#___________________CHALLENGES________________
+'''
+ remove duplicates from linked list
+'''
 
-# remove duplicates from linked list
+def delDuples(node1):
+    # counting vars
+    vals = []
+    node = node1
+    count = 0
 
-# traverse
-    # for each
-        # check if it matches any previously seen vals
+    while node != None: # as long as we arent at end of the linked list
+        print(vals,count,node)
 
-# test case
+        # check if val has been seen before
+        for i in vals:
+            if node.val == i:
+                delNode(node1,count)
+                break
+        vals.append(node.val)
+        count+=1
+        node = node.next
+    return(0)
 
-n1 = Node('a')
-n2 = Node('b')
-n3 = Node('c')
+d1 = Node('a')
+d2 = Node('b')
+d3 = Node('c')
+d4 = Node('b')
+d5 = Node('e')
 
-connectNodes([n1,n2,n3])
+connectNodes([d1,d2,d3,d4,d5])
+
+print('b4')
+d1.traverse()
+
+print('after')
+delDuples(d1)
+d1.traverse()
 
 
 # get kth to last element from a linked list

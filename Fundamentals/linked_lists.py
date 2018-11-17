@@ -125,22 +125,20 @@ def delDuples(node1):
     count = 0
 
     while node != None: # as long as we arent at end of the linked list
-        print(vals,count,node)
-
         # check if val has been seen before
-        for i in vals:
-            if node.val == i:
-                delNode(node1,count)
-                break
-        vals.append(node.val)
+        if node.val in vals:
+            delNode(node1,count)
+            count -= 1
+        else:
+            vals.append(node.val)
         count+=1
         node = node.next
     return(0)
 
 d1 = Node('a')
-d2 = Node('b')
+d2 = Node('a')
 d3 = Node('c')
-d4 = Node('b')
+d4 = Node('a')
 d5 = Node('e')
 
 connectNodes([d1,d2,d3,d4,d5])

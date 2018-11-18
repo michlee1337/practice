@@ -11,15 +11,49 @@ class BST:
         self.root = None
         # consider adding size and height?
 
-    def _traverse(self, cur_node):
-        if cur_node != None:
-            self._traverse(cur_node.left)
+    def _traverseIn(self, cur_node):
+        if cur_node is not None:
+            self._traverseIn(cur_node.left)
             print(cur_node)
-            self._traverse(cur_node.right)
+            self._traverseIn(cur_node.right)
 
-    def traverse(self):
-        if self.root != None:
-            self._traverse(self.root)
+    def _traversePre(self, cur_node):
+        if cur_node is not None:
+            print(cur_node)
+            self._traversePre(cur_node.left)
+            self._traversePre(cur_node.right)
+
+    def _traversePost(self, cur_node):
+        if cur_node is not None:
+            self._traversePost(cur_node.left)
+            self._traversePost(cur_node.right)
+            print(cur_node)
+
+    def _traverseBreadth(self, cur_node):
+        if cur_node is not None:
+            from collections import deque
+            queue = deque()
+            queue.append(cur_node)
+            while len(queue) > 0:
+                cur_node = queue.popleft()
+                print(cur_node)
+                if cur_node.left is not None:
+                    queue.append(cur_node.left)
+                if cur_node.right is not None:
+                    queue.append(cur_node.right)
+
+    def traverse(self, order="in"):
+        if self.root is not None:
+            if order == "in":
+                self._traverseIn(self.root)
+            elif order == "pre":
+                self._traversePre(self.root)
+            elif order == "post":
+                self._traversePost(self.root)
+            elif order == "breadth":
+                self._traverseBreadth(self.root)
+            else:
+                print("I don't understand")
         else:
             print('Empty :(')
 
@@ -49,11 +83,20 @@ class BST:
         else:
             self._insert(val,self.root)
 
+def fill_tree(tree, num_elems=10,max_int=10):
+    from random import randint
+    for i in range(num_elems):
+        cur_elem = randint(0,max_int)
+        tree.insert(cur_elem)
+    return(tree)
+
+def perf_tree(tree):
+    elems = ['a','b','c','d','e','f','g','h','i']
+    for i in elems:
+        tree.insert(i)
+
 # depth first Search
 # pre order
-
-
-
 
 # in order
 
@@ -74,9 +117,17 @@ if __name__ == "__main__":
     '''
     print("Testing BST...")
     test_BST = BST()
+    print("TAn empty tree")
     test_BST.traverse()
-    test_BST.insert(9)
-    test_BST.insert(3)
-    test_BST.insert(2)
-    test_BST.insert(7)
+    fill_tree(test_BST)
+    print("in order")
     test_BST.traverse()
+    print("pre order")
+    test_BST.traverse("pre")
+    print("post order")
+    test_BST.traverse("post")
+    print("breadth")
+    my_tree = BST()
+    perf_tree(my_tree)
+    my_tree.traverse("breadth")
+    my_tree.traverse("banana")

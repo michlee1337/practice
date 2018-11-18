@@ -1,4 +1,8 @@
-# Python is a garbage collecter lang (Java too). Most games never use garb coll langs
+from collections import deque
+
+#________Stack__________
+
+# Python is a garbage collecter lang (Java too). Most games never use garb coll languages
 
 class Node:
     def __init__(self):
@@ -9,7 +13,7 @@ class Stack:
     def __init__(self):
         self.head = None
         self.size = 0
-        # don't need a max size since doing linked list imp
+        # don't need a max size since doing linked list implementation
 
     def push(self, val):
         newN = Node()
@@ -45,11 +49,27 @@ class Stack:
             curr_node = curr_node.next
         return(return_str)
 
-# test case!
+#________Queue__________
+# very unecessary, use deque. but just in case:
+
+class Queue:
+    def __init__(self):
+        self.queue = deque()
+
+    def enqueue(self,item):
+        self.queue.append(item)
+
+    def dequeue(self):
+        return(self.queue.popleft())
+
+    def __str__(self):
+        return(str(self.queue))
+
+# test!
 # call every method
 # call every method in every state - edge cases - you can think of
 if __name__ == "__main__":
-    print('hi')
+    print("Testing Stack object...")
     test_stack = Stack()
     test_stack.push('a')
     test_stack.push('b')
@@ -58,3 +78,11 @@ if __name__ == "__main__":
     topN = test_stack.pop()
     print('top: ', str(topN))
     print(test_stack)
+    print("Testing Queue object...")
+    test_queue = Queue()
+    test_queue.enqueue('a')
+    test_queue.enqueue('b')
+    test_queue.enqueue('c')
+    print(test_queue)
+    print("queue popped:", test_queue.dequeue())
+    print(test_queue)

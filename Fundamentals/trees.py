@@ -57,13 +57,22 @@ class BST:
         else:
             print('Empty :(')
 
-    def find(key,node):
-        if node is None or node.key == key:
-            return(node)
-        elif key < node.key:
-            return find(key, node.left)
+    ## REVIEW: not defined
+    def _find(self,val,cur_node):
+        if cur_node is None:
+            print('val not here')
+        elif cur_node.val == val:
+            print(cur_node)
+        elif val < cur_node.val:
+            return self._find(val, cur_node.left)
         else:
-            return find(key, node.right)
+            return self._find(val, cur_node.right)
+
+    def find(self,val):
+        if self.root is None:
+            print('tree empty')
+        else:
+            return(self._find(val,self.root))
 
     def _insert(self,val,cur_node):
         if val < cur_node.val:
@@ -131,3 +140,5 @@ if __name__ == "__main__":
     perf_tree(my_tree)
     my_tree.traverse("breadth")
     my_tree.traverse("banana")
+    my_tree.find('d')
+    my_tree.find('coconut')

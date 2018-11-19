@@ -57,12 +57,12 @@ class BST:
         else:
             print('Empty :(')
 
-    ## REVIEW: not defined
     def _find(self,val,cur_node):
         if cur_node is None:
             print('val not here')
         elif cur_node.val == val:
-            print(cur_node)
+            # note: i should build in a more valuable measure of location. depth perhaps?)
+            print('found as parent of:', cur_node.left,'and', cur_node.right)
         elif val < cur_node.val:
             return self._find(val, cur_node.left)
         else:

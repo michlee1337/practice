@@ -40,6 +40,14 @@ class HashTable:
         return(1)
 
     def delete(self, key):
+        for i in range(self.size):
+            if self.keys[i] == key:
+                self.keys[i] = None
+                self.vals[i] = None
+                print("deleted from position",i,'. Value: ', self.vals[i])
+                return(0)
+        print('key not found')
+        return(1)
         pass
 
 
@@ -59,3 +67,6 @@ if __name__ == "__main__":
     test_hash.insert(11,'k')
     test_hash.find(2)
     test_hash.find(11)
+    test_hash.delete(2)
+    test_hash.delete(11)
+    print(test_hash, test_hash.size, test_hash.keys, test_hash.vals)

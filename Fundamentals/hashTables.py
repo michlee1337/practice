@@ -32,7 +32,12 @@ class HashTable:
         return(1)
 
     def find(self, key):
-        pass
+        for i in range(self.size):
+            if self.keys[i] == key:
+                print("found at position",i,'. Value: ', self.vals[i])
+                return(0)
+        print('key not found')
+        return(1)
 
     def delete(self, key):
         pass
@@ -52,3 +57,5 @@ if __name__ == "__main__":
     test_hash.insert(9,'i')
     test_hash.insert(10,'j')
     test_hash.insert(11,'k')
+    test_hash.find(2)
+    test_hash.find(11)

@@ -48,7 +48,6 @@ class HashTable:
                 return(0)
         print('key not found')
         return(1)
-        pass
 
 
 if __name__ == "__main__":

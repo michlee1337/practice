@@ -92,6 +92,64 @@ class BST:
         else:
             self._insert(val,self.root)
 
+    def maxDepth(self,cur):
+        max = 0
+        if cur.left is None and cur.right is None:
+            return(max)
+        pass
+
+
+    def draw(self):
+        # check max spacing and add padding
+        next_level = [self.root]
+        not_empty = True
+        while not_empty:
+            not_empty = False
+            cur_level = next_level
+            next_level = []
+            lineT = ''
+            lineB = ''
+            for node in cur_level: # for each node in past level
+                if node is None:
+                    lineT += ('  |  ')
+                    lineB += ('     ')
+                else:
+                    lineT += ('  |  ')
+                    lineB += ('  ' + str(node.val) + '  ')
+                    not_empty = True
+
+                if node is None or node.left is None:
+                    next_level.append(None)
+                else:
+                    next_level.append(node.left)
+
+                if node is None or node.right is None:
+                    next_level.append(None)
+                else:
+                    next_level.append(node.right)
+
+            print(lineT)
+            print(lineB)
+        return(0)
+
+    def commParent(self,val1,val2):
+        loc = self._find(val1)
+        if loc is None:
+            return('not in tree')
+        while loc is not None:
+            try1 = self.bfs(loc,val2)
+            # should remove checked nodes
+            if try1 is not None:
+                return(loc.parent())
+            parent = loc.parent()
+            if parent.left() == loc:
+                loc = parent.right()
+            else:
+                loc = parent.left()
+                # oops infinite
+                # should probably do this recursively w a modified dfs
+        pass
+
 def fill_tree(tree, num_elems=10,max_int=10):
     from random import randint
     for i in range(num_elems):
@@ -115,18 +173,9 @@ def perf_tree(tree):
 
 if __name__ == "__main__":
     '''
-    print("Testing tree...")
-    root = Node('A')
-    c1 = Node('B')
-    c2 = Node('C')
-    root.left = c1
-    root.right = c2
-    print(root)
-    print(root.left, root.right)
-    '''
     print("Testing BST...")
     test_BST = BST()
-    print("TAn empty tree")
+    print("An empty tree")
     test_BST.traverse()
     fill_tree(test_BST)
     print("in order")
@@ -142,3 +191,11 @@ if __name__ == "__main__":
     my_tree.traverse("banana")
     my_tree.find('d')
     my_tree.find('coconut')
+    '''
+    print("Testing BST...")
+    test_BST = BST()
+    fill_tree(test_BST)
+    print("in order")
+    test_BST.traverse()
+    print('testing draw')
+    test_BST.draw()

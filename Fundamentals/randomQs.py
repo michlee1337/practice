@@ -24,13 +24,19 @@ class Stack():
 
 # convert decimal to binary
 def dToB(num):
-    ret_arr = []
+    ret_str = ''
     quotient = num
     while quotient != 0:
         rem = quotient % 2
         quotient = quotient//2
-        ret_arr.append(rem)
-    return(ret_arr[::-1])
+        ret_str = str(rem) + ret_str
+    return(ret_str)
+
+def dToB_recur(num):
+    if num == 0:
+        return('')
+    else:
+        return(dToB_recur(num//2) + str(num%2))
 
 # convert binary to decimal
 def bToD(numB):
@@ -109,7 +115,9 @@ if __name__ == "__main__":
     print(test.pop())
     print('testing conversion')
     print(dToB(13))
+    print(dToB_recur(13))
     print(dToB(174))
+    print(dToB_recur(174))
     print(dToH(7562))
     print(dToH(79))
     print(bToD([1,1,0,1]))

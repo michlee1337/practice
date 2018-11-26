@@ -1,4 +1,3 @@
-
 # find the first common parent of two nodes in the tree
 class Node():
     def __init__(self, val):

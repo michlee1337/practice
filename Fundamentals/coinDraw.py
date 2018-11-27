@@ -57,14 +57,21 @@ print(fib(16))
 print(fib1(16,memo))
 print(fib2(16))
 
-# find best move given coin stack: bottom up approach
+# find best move given coin stack: recurse
 def maxSum(coinStack):
     # base case
-    if len(coinStack) == 1:
-        return(coinStack[0])
+    if len(coinStack) <= 2:
+        return(max(coinStack))
     else:
-        return(max(coinStack[0] + min(coinStack[1:]),coinStack[-1] + min(coinStack[:-1])))
+        return(max(coinStack[0] + min(maxSum(coinStack[2:]),maxSum(coinStack[1:-1])),
+        coinStack[-1] + min(maxSum(coinStack[1:-1]),maxSum(coinStack[:-2]))))
+
 
 print(maxSum([1]))
 print(maxSum([1,2]))
 print(maxSum([1,2,3]))
+print(maxSum([1,2,3,4,5,6,7,8,9,1,4,2]))
+
+test = [1,2,3]
+sum([1,2,3,4,5,6,7,8,9,1,4,2])
+52-29

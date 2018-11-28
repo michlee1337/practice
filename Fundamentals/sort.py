@@ -25,3 +25,5 @@ def mergeSort(arr):
         return(sorted)
 
 print(mergeSort([19,47,2792,3,4,2]))
+
+def sortK()

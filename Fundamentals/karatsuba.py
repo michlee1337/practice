@@ -34,10 +34,20 @@ def basicMultiplication(a,b):
     for p in partials:
         for x in range(standLen - len(p)):
             p.insert(0,0)
-    print(standLen)
-    res = [sum(x) for x in partials]
+
+    # add each element in partials from the last to first index
+    res = [0] * standLen
+    for i in range(standLen-1,-1,-1):
+        for p in partials:
+            res[i] += p[i]
+    # check for carry values
+    carry = 0
     print(res)
-    return(partials)
+    for p in range(len(res)-1,-1,-1):
+        cur = res[p]
+        res[p] = (cur + carry) % 10
+        carry = (cur + carry) // 10
+    return(res)
 
 #print(basicMultiplication(9,2))
 print(basicMultiplication(3841,24165))

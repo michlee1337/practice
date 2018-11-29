@@ -6,19 +6,38 @@ def basicMultiplication(a,b):
     int2 = [int(i) for i in str(min(a,b))]
     partials = []
     # for each digit in smaller number
+    pos = 0
     for i in int2[::-1]:
         # compute a partial product and store it
         partial = []
         carry = 0
+        # for each digit in larger number
         for j in int1[::-1]:
+            # add the singles to the left of partial
             partial.insert(0,(carry + (i*j)) % 10)
+            # store whatever is left to be carried to the next multiplication
             carry = ((i*j) + carry)// 10
+        # insert any additional numbers to the partial
         if carry != 0:
             partial.insert(0,carry)
+        # pad with 0s
+        for x in range(pos):
+            partial.append(0)
+        # store partial
         partials.append(partial)
+        pos += 1
     # add all partial products
-    res = 0
+
+    # make all partials same length by padding 0s
+    standLen = max([len(i) for i in partials])
+
+    for p in partials:
+        for x in range(standLen - len(p)):
+            p.insert(0,0)
+    print(standLen)
+    res = [sum(x) for x in partials]
+    print(res)
     return(partials)
 
-print(basicMultiplication(9,2))
+#print(basicMultiplication(9,2))
 print(basicMultiplication(3841,24165))

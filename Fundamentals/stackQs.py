@@ -16,33 +16,29 @@ class qWithStack1():
         return(0)
 
     def dequeue(self):
-        # s2 holds the earliest items inserted with the earliest item on top
-        # move items into s2 in inverted order only if s2 is empty
+        # if nothing stored
+        if len(self.stack1) == 0 and len(self.stack2) == 0:
+            return('empty :()')
+        # moving items from one stack to another inverses the order
+        # move items into s2 only if s2 is empty
+        # else you'll be putting newer items above older
         if len(self.stack2) == 0:
             while len(self.stack1) > 0:
                 self.stack2.append(self.stack1.pop())
         return(self.stack2.pop())
 
-
-testQ = qWithStack1()
-print(testQ.enqueue(1))
-testQ.enqueue(2)
-testQ.enqueue(3)
-print(testQ.dequeue())
-testQ.enqueue(4)
-testQ.enqueue(5)
-print(testQ.dequeue())
-print(testQ.dequeue())
-print(testQ.dequeue())
-print(testQ.dequeue())
-
-if __name__ is "__main__":
+if __name__ == "__main__":
     testQ = qWithStack1()
+    print(testQ.dequeue())
     testQ.enqueue(1)
+    testQ.enqueue('bat')
     testQ.enqueue(2)
     testQ.enqueue(3)
-    testQ.dequeue()
-    testQ.dequeue()
+    print(testQ.dequeue())
+    print(testQ.dequeue())
+    print(testQ.dequeue())
+    print(testQ.dequeue())
+    print(testQ.dequeue())
 
 # NOTE: test edge cases
 # NOTE: describe complexity

@@ -60,6 +60,44 @@ class qWithStack2():
             return('empty :(')
         return(self.stack2.pop())
 
+class specialStack():
+    # implement push pop isEmpty isFull getMin in O(1):
+    def __init__(self, max = 100):
+        self.stack = []
+        self.minStack = []
+        self.len = 0
+        self.max = max
+
+    def push(self,x):
+        # append
+        self.stack.append(x)
+        # update min
+        if len(self.minStack) == 0 or x < self.minStack[-1]:
+            self.minStack.append(x)
+        else:
+            self.minStack.append(self.minStack[-1])
+        # update length
+        self.len += 1
+        return(0)
+
+    def pop(self):
+        # update length
+        self.len -= 1
+        # update minStack
+        self.minStack.pop()
+        # return last item in stack
+        return(self.stack.pop())
+
+
+    def isEmpty(self):
+        return(self.len == 0)
+
+    def isFull(self):
+        return(self.len >= (self.max-1))
+
+    def getMin(self):
+        return(self.minStack[-1])
+
 if __name__ == "__main__":
     print('testing method 1')
     testQ = qWithStack1()
@@ -85,3 +123,16 @@ if __name__ == "__main__":
     print(testQ.dequeue())
     print(testQ.dequeue())
     print(testQ.dequeue())
+    print('testing special stack')
+    testS = specialStack(5)
+    print(testS.isEmpty())
+    print(testS.isFull())
+    testS.push(10)
+    testS.push(9)
+    testS.push(5)
+    testS.push(2)
+    testS.push(19)
+    print(testS.isEmpty())
+    print(testS.isFull())
+    print(testS.getMin())
+    print(testS.pop())

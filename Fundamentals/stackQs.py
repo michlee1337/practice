@@ -98,6 +98,35 @@ class specialStack():
     def getMin(self):
         return(self.minStack[-1])
 
+# implement two stacks in one array
+class twoStacks():
+    # one stack from start to end, other stack from end to start
+    # marker to denote difference
+    def __init__(self):
+        self.list = ['marker']
+
+    def push1(self,x):
+        # add to start of stack
+        self.list.insert(0,x)
+
+    def push2(self,x):
+        # add to end of stack
+        self.list.append(x)
+
+    def pop1(self):
+        # pop from start of list as long as it is not the marker
+        if self.list[0] != 'marker':
+            return(self.list.pop(0))
+        # else inform empty
+        return('empty :(')
+
+    def pop2(self):
+        #pop from end of list as long as it is not the marker
+        if self.list[-1] != 'marker':
+            return(self.list.pop())
+        # else inform empty
+        return('empty :(')
+
 if __name__ == "__main__":
     print('testing method 1')
     testQ = qWithStack1()
@@ -136,3 +165,16 @@ if __name__ == "__main__":
     print(testS.isFull())
     print(testS.getMin())
     print(testS.pop())
+    print('test double stack')
+    testDS = twoStacks()
+    testDS.push1('a')
+    testDS.push2(1)
+    testDS.push1('b')
+    testDS.push2(2)
+    testDS.push2(3)
+    print(testDS.pop1())
+    print(testDS.pop1())
+    print(testDS.pop1())
+    print(testDS.pop2())
+    print(testDS.pop2())
+    print(testDS.pop2())

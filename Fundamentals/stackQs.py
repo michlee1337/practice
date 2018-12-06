@@ -1,6 +1,4 @@
-'''
-Implement a queue using stack
-'''
+#_______Implement a queue using stack______#
 
 # best for enqueue
 # enqueue = O(1)
@@ -98,7 +96,7 @@ class specialStack():
     def getMin(self):
         return(self.minStack[-1])
 
-# implement two stacks in one array
+#_______ implement two stacks in one array ________#
 class twoStacks():
     # one stack from start to end, other stack from end to start
     # marker to denote difference
@@ -126,6 +124,43 @@ class twoStacks():
             return(self.list.pop())
         # else inform empty
         return('empty :(')
+
+#______Stack using queues______#
+
+# first thought, do it on dequeue
+class stackWQ():
+    def __init__(self):
+        self.queue1 = []
+        self.queue2 = []
+
+    def enqueue(self,x):
+        # if there's anything in q2, add there
+        if len(self.queue2) > 0:
+            self.queue2.append(x)
+            return(0)
+        # else add in q1
+        self.queue1.append(x)
+        return(0)
+
+    def dequeue(self):
+        # if queue1 not empty, shift items to queue2 except last
+        if self.queue1 != []:
+            while len(self.queue1) > 1:
+                self.queue2.append(self.queue1.pop(0))
+            return(self.queue1.pop(0))
+        elif self.queue2 != []:
+            while len(self.queue2) > 1:
+                self.queue1.append(self.queue2.pop(0))
+            return(self.queue2.pop(0))
+        return('empty :(')
+# enqueue O(1)
+# dequeue O(n)
+# space O(n)
+
+# can i optimize dequeue?
+
+
+
 
 if __name__ == "__main__":
     print('testing method 1')
@@ -178,3 +213,13 @@ if __name__ == "__main__":
     print(testDS.pop2())
     print(testDS.pop2())
     print(testDS.pop2())
+    print('stack w q')
+    testSQ = stackWQ()
+    print(testSQ.dequeue())
+    testSQ.enqueue(1)
+    testSQ.enqueue(2)
+    testSQ.enqueue(3)
+    print(testSQ.dequeue())
+    print(testSQ.dequeue())
+    print(testSQ.dequeue())
+    print(testSQ.dequeue())

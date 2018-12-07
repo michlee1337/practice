@@ -157,7 +157,36 @@ class stackWQ():
 # dequeue O(n)
 # space O(n)
 
-# can i optimize dequeue?
+# optimized dequeue, wasted some space for coding readability
+
+class stackWQ2():
+    def __init__(self):
+        self.queue1 = []
+        self.queue2 = []
+
+    def enqueue(self,x):
+        # ensure q1 always in reverse
+        # add to q2
+        self.queue2.append(x)
+        # add anything from q1 into q2
+        while len self.queue1 > 0:
+            self.queue2.appned(self.queue1.pop(0))
+        # switch q1 and q2
+        temp = self.queue1
+        self.queue1 = self.queue2
+        self.queue2 = temp
+        return(0)
+
+    def dequeue(self):
+        # if queue1 not empty, shift items to queue2 except last
+        if self.queue1 == []:
+            return('empty :(')
+        else:
+            return(self.queue1.pop(0))
+
+#_____stack with operations on the middle_______#
+
+# in O(1) time complexity
 
 
 

@@ -169,7 +169,7 @@ class stackWQ2():
         # add to q2
         self.queue2.append(x)
         # add anything from q1 into q2
-        while len self.queue1 > 0:
+        while len(self.queue1) > 0:
             self.queue2.appned(self.queue1.pop(0))
         # switch q1 and q2
         temp = self.queue1
@@ -188,10 +188,94 @@ class stackWQ2():
 
 # in O(1) time complexity
 
+# needs pointer to the center
+# can't be array, not O(1),
+# to move back and forth must be doubly linked list
 
+class Node():
+    def __init__(self, val):
+        self.val = val
+        self.next = None
+        self.last = None
+    def __str__(self):
+        return(str(self.val))
+
+class stackMid():
+    def __init__(self):
+         self.head = None
+         self.mid = None
+         self.len = 0
+
+    def traverse(self):
+        cur_node = self.head
+        while cur_node is not None:
+            print(cur_node)
+            cur_node = cur_node.next
+        return(0)
+
+    def push(self,val):
+        # if empty stack
+        if self.head is None:
+            self.head = Node(val)
+            self.mid = self.head
+        else:
+            # add as new node at the head of DLL
+            new_node = Node(val)
+            new_node.next = self.head
+            self.head.last = new_node
+            # update stack head
+            self.head = new_node
+        self.len += 1
+        # update mid if new length is odd
+        # thus when DLL is even, will always return the mid further from head
+        if self.len != 1 and self.len%2 == 1:
+            self.mid = self.mid.last
+        return(0)
+
+    def pop(self):
+        # move mid if cur length is odd
+        # else since mid maintained as further from head, will still be mid after pop
+        if self.len % 2 == 1:
+            self.mid = self.mid.next
+        # store return node
+        ret = self.head
+        # update head
+        self.head = self.head.next
+        # clean connections
+        self.head.last = None
+        ret.next = None
+        self.len -= 1
+        return(ret)
+
+    def findMid(self):
+        return(self.mid)
+
+    def delMid(self):
+        # store mid
+        ret = self.mid
+
+        # determine which direction new mid will be in based on odd/even
+        if self.len % 2 == 0:
+            # move mid
+            self.mid = self.mid.last
+            # update connections
+            self.mid.next = self.mid.next.next
+            self.mid.next.last = self.mid
+        else:
+            # move mid
+            self.mid = self.mid.next
+            # update connections
+            self.mid.last = self.mid.last.last
+            self.mid.last.next = self.mid
+        # clear up old mid's connections
+        ret.next = None
+        ret.last = None
+        self.len -= 1
+        return(0)
 
 
 if __name__ == "__main__":
+    '''
     print('testing method 1')
     testQ = qWithStack1()
     print(testQ.dequeue())
@@ -252,3 +336,32 @@ if __name__ == "__main__":
     print(testSQ.dequeue())
     print(testSQ.dequeue())
     print(testSQ.dequeue())
+    '''
+    print('test mid stack')
+    midS = stackMid()
+    print('testing everything expcept delMid')
+    midS.traverse()
+    midS.push(1)
+    midS.push(2)
+    print('mid',midS.findMid())
+    midS.push(3)
+    print('mid',midS.findMid())
+    midS.push(4)
+    midS.push(5)
+    print('mid',midS.findMid())
+    midS.traverse()
+    print(midS.pop())
+    print('mid',midS.findMid())
+    print(midS.pop())
+    print('mid',midS.findMid())
+    midS.push(4)
+    midS.push(5)
+    print('testing delMid')
+    midS.traverse()
+    print('mid',midS.findMid())
+    midS.delMid()
+    midS.traverse()
+    print('mid',midS.findMid())
+    midS.delMid()
+    midS.traverse()
+    print('mid',midS.findMid())

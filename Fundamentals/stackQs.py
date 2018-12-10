@@ -283,26 +283,26 @@ class stackMid():
 # each item is node that links to next list.
 
 
-def kStacks(numStacks = 3, arraySize = 10):
-    def __init__:
+class kStacks():
+    def __init__(self, numStacks = 3, arraySize = 10):
         self.stack = [None] * arraySize
         # head locations initialized to -1 to show that it DNE
         self.heads = [-1] * numStacks
         # stores index of next free slot in stack, initialized as 0
         self.free = 0
 
-    def push(int1, val):
+    def push(self, int1, val):
         # store in free index
         cur_loc = self.stack[self.free]
         cur_loc = Node(val)
         # connect to the head
         # if head is currently none, skip this
-        if self.head[int1] != -1:
-            cur_loc.next = self.head[int1]
-        # update the head
-        self.head[int1] = cur_loc
+        if self.heads[int1] != -1:
+            cur_loc.next = self.heads[int1]
+        # update the heads
+        self.heads[int1] = cur_loc
 
-    def pop(int1):
+    def pop(self, int1):
         # check the head of that stack
 
         # if none, inform
@@ -318,7 +318,6 @@ def kStacks(numStacks = 3, arraySize = 10):
             ret.next = None
             # return val
             return(ret)
-
 
 if __name__ == "__main__":
     '''
@@ -382,7 +381,6 @@ if __name__ == "__main__":
     print(testSQ.dequeue())
     print(testSQ.dequeue())
     print(testSQ.dequeue())
-    '''
     print('test mid stack')
     midS = stackMid()
     print('testing everything expcept delMid')
@@ -411,3 +409,18 @@ if __name__ == "__main__":
     midS.delMid()
     midS.traverse()
     print('mid',midS.findMid())
+    print('testing k stacks')
+    kStack = kStacks()
+    print(kStack)
+    print(kStack.heads)
+    kStack.push(0,1)
+    kStack.push(0,2)
+    kStack.push(0,3)
+    print(kStack.pop(0))
+    kStack.push(1,'a')
+    kStack.push(1,'b')
+    kStack.push(1,'c')
+    print(kStack.pop(1))
+    print(kStack.pop(1))
+    print(kStack.pop(0))
+    '''

@@ -319,6 +319,32 @@ class kStacks():
             # return val
             return(ret)
 
+#______mergable stack_______#
+
+# implement with linked lists
+
+class mergeStack():
+    def __init__(self):
+        self.head = None
+        self.tail = None
+    def push(self,x):
+        if self.head is None:
+            self.head = Node(x)
+            self.tail = self.head
+        else:
+            new = Node(x)
+            new.next = self.head
+            self.head = new
+    def pop(self):
+        ret = self.head
+        self.head = self.head.next
+        ret.next = None
+        return(ret)
+
+def merge(stack1,stack2):
+    stack1.tail.next = stack2.head
+    return(0)
+
 if __name__ == "__main__":
     '''
     print('testing method 1')
@@ -423,4 +449,19 @@ if __name__ == "__main__":
     print(kStack.pop(1))
     print(kStack.pop(1))
     print(kStack.pop(0))
+    stackA = mergeStack()
+    stackB = mergeStack()
+    stackA.push(1)
+    stackA.push(2)
+    stackA.push(3)
+    stackB.push('a')
+    stackB.push('b')
+    stackB.push('c')
+    print(stackA.pop())
+    print(stackB.pop())
+    merge(stackA,stackB)
+    cur_node = stackA.head
+    while cur_node is not None:
+        print(cur_node)
+        cur_node = cur_node.next
     '''

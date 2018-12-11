@@ -345,6 +345,42 @@ def merge(stack1,stack2):
     stack1.tail.next = stack2.head
     return(0)
 
+#_______stack with return min in O(1)_____#
+class stackNMin():
+    def __init__(self):
+        self.stack = []
+        # store min
+        self.min = None
+
+    def push(self,x):
+        if self.min is None:
+            self.min = x
+            self.stack.append(x)
+            return(0)
+
+        elif x < self.min:
+            # in order to be able to backsolve for past min if min is popped
+            self.stack.append(x - self.min)
+            self.min = x
+            return(0)
+        self.stack.append(x)
+        return(0)
+
+    def pop(self):
+        ret = self.stack.pop()
+        # if stack is empty
+        if ret == self.min:
+            self.min == None
+            return(ret)
+        # if currently popping min, backsolve for past min
+        if ret < self.min:
+            past_min = self.min - ret
+            ret = self.min
+            self.min = past_min
+            return(ret)
+        # else just return
+        return(ret)
+
 if __name__ == "__main__":
     '''
     print('testing method 1')
@@ -464,4 +500,21 @@ if __name__ == "__main__":
     while cur_node is not None:
         print(cur_node)
         cur_node = cur_node.next
+    print('testing stack w retrive min')
+    testMinS = stackNMin()
+    testMinS.push(2)
+    testMinS.push(3)
+    testMinS.push(4)
+    print('test updating min')
+    print(testMinS.stack,testMinS.min)
+    testMinS.push(1)
+    print(testMinS.stack,testMinS.min)
+    print('test updating min when popping min')
+    print(testMinS.pop())
+    print(testMinS.stack,testMinS.min)
+    print('test w negative numbers')
+    testMinS.push(-1)
+    print(testMinS.stack,testMinS.min)
+    print(testMinS.pop())
+    print(testMinS.stack,testMinS.min)
     '''

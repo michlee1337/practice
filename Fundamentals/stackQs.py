@@ -381,6 +381,53 @@ class stackNMin():
         # else just return
         return(ret)
 
+class stackQ1():
+    # either push or pop has top be O(n), no matter what something will require reordering
+    # make push expensive
+    def __init__(self):
+        self.queue = []
+        self.size = 0
+
+    def push(self, x):
+        # insert x
+        self.queue.insert(0,x)
+
+        # move all things before x to after x in order
+        for i in self.size:
+            self.queue.insert(0,self.queue.pop())
+
+        # update size
+        self.size += 1
+        return(0)
+
+    def pop():
+        return(self.pop())
+
+class stackQ2():
+    # make pop expensive
+    def __init__(self):
+        self.queue = []
+        self.size = 0
+
+    def push(self, x):
+        # insert x
+        self.queue.insert(0,x)
+
+        # update size
+        self.size += 1
+        return(0)
+
+    def pop():
+        # update size
+        self.size -= 1
+        # move all things in the front of last elem to the end
+        for i in (self.size):
+            self.queue.insert(0,self.queue.pop())
+
+        # return last elem
+        return(self.queue.pop())
+
+
 if __name__ == "__main__":
     '''
     print('testing method 1')

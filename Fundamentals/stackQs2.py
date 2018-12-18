@@ -3,39 +3,26 @@
 class MinHeap():
     def __init__(self):
         self.heap = []
+        self.size = 0
 
-    def parent(self,i):
-        return(self[(i-1)//2])
+    # parent: (i-1)//2
+    # left child: (i*2)+1
+    # right Child: (i*2)+2]
 
-    def leftChild(self,i):
-        return(self[(i*2)+1])
-
-    def rightChild(self,i):
-        return(self[(i*2)+2])
-
-    def _push(cur_node, x):
-        if cur_node.left is None:
-            cur_node.left = Node(self.count, x)
-            self.count += 1
-            return(0)
-        elif cur_node.right is None:
-            cur_node.right = Node(self.count, x)
-            return(0)
-        else:
-            cur_node = cur_node.left
+    def bubbleUp(self,i):
+        # while parent exists for this index
+        while i//2 > 0:
+            # check with parent, if larger, switch and repeat w new index
+            if self.heap[i] > self.heap[(i-1)//2]:
+                temp = self.heap[(i-1)//2]
+                self.heap[(i-1)//2] = self.heap[i]
+                self.heap[i] = temp
+                bubbleUp(self,(i-1)//2)
+            # else, end and return
+            else:
+                return(0)
 
     def push(self,x):
-        # if empty tree, insert at root
-        if self.root is None:
-            self.root = Node(self.count, x)
-            self.count += 1
-            return(0)
-        # find next empty slot
-        _push(self.root,x)
-        # check children
-
-
-
-
-        if self.root == None:
-            self
+        self.heap.append(x)
+        self.size += 1
+        self.bubbleUp(self.size)

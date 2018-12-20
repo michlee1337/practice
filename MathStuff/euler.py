@@ -6,8 +6,8 @@ def roc_money(point):
 
 # formula to find next point using euler method
 def find_next(curr_point, step_size, roc_func):
-    curr_point[0] = curr_point[0] + step_size
     curr_point[1] = (roc_func(curr_point)*step_size) +curr_point[1]
+    curr_point[0] = curr_point[0] + step_size
     return(curr_point)
 
 # main func
@@ -31,5 +31,4 @@ print('step size 0.015')
 euler_method([0,0],0.015,roc_money,12, [])
 print('step size 0.013')
 euler_method([0,0],0.013,roc_money,12, [])
-
 # how to plot it nicely in function

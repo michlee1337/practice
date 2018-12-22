@@ -16,11 +16,8 @@ class MinHeap():
         if i <= 0:
             return(0)
         while i//2 >= 0:
-            print('check')
             # check with parent, if larger, switch and repeat w new index
             if self.heap[i] < self.heap[(i-1)//2]:
-                print('switched')
-                print(self.heap[i], self.heap[(i-1)//2])
                 temp = self.heap[(i-1)//2]
                 self.heap[(i-1)//2] = self.heap[i]
                 self.heap[i] = temp
@@ -29,11 +26,46 @@ class MinHeap():
             else:
                 return(0)
 
-    def push(self,x):
+    def bubbledown(self,i):
+        if i >= self.size:
+            return(0)
+        while i < self.size:
+            if self.heap[i] > self.heap[(i*2)+1]:
+                temp = self.heap[i]
+                self.heap[i] = self.heap[(i*2)+1]
+                self.heap[(i*2)+1] = temp
+                self.bubbleUp((i*2)+1)
+            elif self.heap[i] > self.heap[(i*2)+2]:
+                temp = self.heap[i]
+                self.heap[i] = self.heap[(i*2)+2]
+                self.heap[(i*2)+2] = temp
+                self.bubbleUp((i*2)+2)
+            else:
+                return(0) 
+
+    def insert(self,x):
         self.heap.append(x)
         self.size += 1
         self.bubbleUp(self.size-1)
-print(0//2)
+
+    def extract(self):
+        ret = self.heap[0]
+        self.heap[0] = self.heap.pop()
+        seld.size -= 1
+
+
+
+class stack_priQ():
+    def __init__(self):
+        self.heap = MinHeap()
+
+    def push(x):
+        self.heap.insert(x)
+
+    def pop():
+        self.heap.pop()
+
+
 if __name__ == "__main__":
     my_heap = MinHeap()
     my_heap.push('7')

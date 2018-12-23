@@ -11,8 +11,6 @@ class MinHeap():
 
     def bubbleUp(self,i):
         # while parent exists for this index
-        print(self.heap)
-        print('cur ind',i)
         if i <= 0:
             return(0)
         while i//2 >= 0:
@@ -26,7 +24,7 @@ class MinHeap():
             else:
                 return(0)
 
-    def bubbledown(self,i):
+    def bubbleDown(self,i):
         if i >= self.size:
             return(0)
         while i < self.size:
@@ -34,14 +32,14 @@ class MinHeap():
                 temp = self.heap[i]
                 self.heap[i] = self.heap[(i*2)+1]
                 self.heap[(i*2)+1] = temp
-                self.bubbleUp((i*2)+1)
+                self.bubbleDown((i*2)+1)
             elif self.heap[i] > self.heap[(i*2)+2]:
                 temp = self.heap[i]
                 self.heap[i] = self.heap[(i*2)+2]
                 self.heap[(i*2)+2] = temp
-                self.bubbleUp((i*2)+2)
+                self.bubbleDown((i*2)+2)
             else:
-                return(0) 
+                return(0)
 
     def insert(self,x):
         self.heap.append(x)
@@ -51,9 +49,8 @@ class MinHeap():
     def extract(self):
         ret = self.heap[0]
         self.heap[0] = self.heap.pop()
-        seld.size -= 1
-
-
+        self.bubbleDown(0)
+        self.size -= 1
 
 class stack_priQ():
     def __init__(self):
@@ -63,22 +60,24 @@ class stack_priQ():
         self.heap.insert(x)
 
     def pop():
-        self.heap.pop()
+        self.heap.extract()
 
 
 if __name__ == "__main__":
     my_heap = MinHeap()
-    my_heap.push('7')
+    my_heap.insert('7')
     print(my_heap.heap)
     print('______')
-    my_heap.push('6')
+    my_heap.insert('6')
     print(my_heap.heap)
     print('______')
-    my_heap.push('5')
+    my_heap.insert('5')
     print(my_heap.heap)
     print('______')
-    my_heap.push('4')
+    my_heap.insert('4')
     print(my_heap.heap)
     print('______')
-    my_heap.push('3')
+    my_heap.insert('3')
+    print(my_heap.heap)
+    my_heap.extract()
     print(my_heap.heap)

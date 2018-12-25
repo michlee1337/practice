@@ -25,7 +25,7 @@ class MinHeap():
                 return(0)
 
     def bubbleDown(self,i):
-        if i >= self.size:
+        if (i*2) >= self.size:
             return(0)
         while i < self.size:
             if self.heap[i] > self.heap[(i*2)+1]:
@@ -33,6 +33,8 @@ class MinHeap():
                 self.heap[i] = self.heap[(i*2)+1]
                 self.heap[(i*2)+1] = temp
                 self.bubbleDown((i*2)+1)
+            if ((i*2)+2) >= self.size:
+                return(0)
             elif self.heap[i] > self.heap[(i*2)+2]:
                 temp = self.heap[i]
                 self.heap[i] = self.heap[(i*2)+2]
@@ -49,8 +51,8 @@ class MinHeap():
     def extract(self):
         ret = self.heap[0]
         self.heap[0] = self.heap.pop()
-        self.bubbleDown(0)
         self.size -= 1
+        self.bubbleDown(0)
 
 class stack_priQ():
     def __init__(self):

@@ -20,8 +20,9 @@ The word "kangaroo" is the longest word in D, but it isn't a subsequence of S.
 
 # determine if it is subsequence, assuming start at diff char
 
-# PROBLEM: what if the same char appears multiple times in b and the subseq is not true at the first occurence but is true at the second
 def isSubSeq(a,b):
+    if len(a) > len(b):
+        return(False)
     # find the starting index for b at which a possible subseq might start
     if not a:
         return(True)
@@ -50,6 +51,7 @@ print(isSubSeq('apple','apple'))
 print(isSubSeq('ppl','apple'))
 print(isSubSeq('ple','apple'))
 print(isSubSeq('pplb','apple'))
+print(isSubSeq('pplebeeeeee','apple'))
 '''
 # find len of a as subseq in b
 def lenSubseq(a,b):

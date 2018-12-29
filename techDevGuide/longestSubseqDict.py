@@ -18,30 +18,28 @@ The word "kangaroo" is the longest word in D, but it isn't a subsequence of S.
 
 #helper func
 
-# check if is subsequence, assuming start at same char
-def isSubSeqP(a,b):
-    counter = 0
-    for i in range(len(a)):
-        if a[i] != b[i]:
-            return False
-    return True
+# determine if it is subsequence, assuming start at diff char
 
-#print(isSubSeqP('appb','apple'))
-
-# check if is subsequence, assuming start at diff char
+# PROBLEM: what if the same char appears multiple times in b and the subseq is not true at the first occurence but is true at the second
 def isSubSeq(a,b):
+    # find the starting index for b at which a possible subseq might start
     if not a:
         return(True)
-    bStartIndex = 0
+    bStartIndex = []
     for i in range(len(b)):
         if b[i] == a[0]:
-            bStartIndex = i
-            break
-    counter = 0
-    for i in range(len(a)):
-        if a[i] != b[bStartIndex + i]:
-            return False
-    return True
+            bStartIndex.append(i)
+    # for all possible starting indexes, check if a is substring
+    for x in bStartIndex:
+        counter = 0
+        subSeq = True
+        for i in range(len(a)):
+            if a[i] != b[x + i]:
+                subSeq = False
+                break
+        if subSeq == True:
+            return(subSeq)
+    return(False)
 
 # is a blank string a subseq? can be formed by deletions from b without any reordering so for now I'll assume yes
 
@@ -50,6 +48,7 @@ print(isSubSeq('','apple'))
 print(isSubSeq('app','apple'))
 print(isSubSeq('apple','apple'))
 print(isSubSeq('ppl','apple'))
+print(isSubSeq('ple','apple'))
 print(isSubSeq('pplb','apple'))
 '''
 # find len of a as subseq in b

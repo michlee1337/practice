@@ -5,14 +5,14 @@ def inToPost():
 	operators = ['/','*','+','-']
 	output = []
 	opstack = []
-	bracket = False
+	#bracket = False
 
 	# for each item in input
 	for item in exp0:
 
 	# if open bracket, all operators have priority until close bracket
-	if item == "(":
-		bracket = True
+	#if item == "(":
+	#	bracket = True
 
 	# if operand, add to end of output
 	elif item not in operators:
@@ -20,10 +20,15 @@ def inToPost():
 
 	# if operator
 	if item in operators:
-		if bracket is True:
-			while opstack is not None and operarors.find(opstack[0]) > operators.find(item):
-				output.append(opstack.pop())
-#! change this to make brackets work better
+		while opstack != [] and operators.find(opstack[0]) < operators.find(item):
+			output.append(opstack.pop())
+		opstack.append(item)
+
+
+	#	if bracket is True:
+	#		while opstack is not None and operarors.find(opstack[0]) > operators.find(item):
+	#			output.append(opstack.pop())
+
 
 		# if any higher priority in operand stack
 			# pop to end of output

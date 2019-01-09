@@ -24,20 +24,7 @@ def inToPost():
 			output.append(opstack.pop())
 		opstack.append(item)
 
-
-	#	if bracket is True:
-	#		while opstack is not None and operarors.find(opstack[0]) > operators.find(item):
-	#			output.append(opstack.pop())
-
-
-		# if any higher priority in operand stack
-			# pop to end of output
-		# append operator
-
-	# for all operators remaining in stack
-		# pop to end of output
-
-	print(expO)
+	print('hi')
 
 if __name__ == "__main__":
 	inToPost()

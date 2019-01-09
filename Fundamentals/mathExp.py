@@ -1,13 +1,13 @@
 # convert in to post fix
 
-def inToPost():
-	expO = raw_input("input infix exp seperated by spaces: ").split()
+def inToPost(exp):
+	exp = exp.split()
 	operators = ['/','*','+','-','(']
 	output = []
 	opstack = []
 
 	# for each item in input
-	for item in expO:
+	for item in exp:
 
 		# if open bracket, add to opp stack
 		if item == "(":
@@ -21,7 +21,7 @@ def inToPost():
 
 		# if operator, add to opstack after removing prioritised operators
 		elif item in operators:
-			while opstack != [] and operators.index(opstack[-1]) < operators.index(item):
+			while opstack != [] and operators.index(opstack[-1]) <= operators.index(item):
 				output.append(opstack.pop())
 			opstack.append(item)
 
@@ -39,4 +39,6 @@ def inToPost():
 	print(" ".join(output))
 
 if __name__ == "__main__":
-	inToPost()
+	expL = ["A + B * C + D", "( A + B ) * ( C + D )", "A * B + C * D", "A + B + C + D"]
+	for exp1 in expL:
+		inToPost(exp1)

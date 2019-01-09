@@ -24,7 +24,7 @@ def inToPost():
 			output.append(opstack.pop())
 		opstack.append(item)
 
-	print('hi')
+	print('test')
 
 if __name__ == "__main__":
 	inToPost()

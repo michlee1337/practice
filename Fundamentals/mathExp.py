@@ -33,6 +33,23 @@ def inToPost(exp):
 	# pop anything remaining on opstack
 	while len(opstack) != 0:
 		output.append(opstack.pop())
+	return(output)
+
+def postEval(exp):
+	exp = exp.split()
+	operators = ['/','*','+','-','(']
+	oprStack = []
+	# read from left to right
+	for item in exp:
+		# if operator, eval with last two operands
+		if item in operators:
+			oprStack.append(int(oprStack.pop())+int(item)+int(oprStack.pop()))
+		# if operands, store
+		else:
+			oprStack.append(item)
+	return(oprStack.pop())
+
+		
 
 
 

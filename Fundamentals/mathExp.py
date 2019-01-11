@@ -36,12 +36,10 @@ def inToPost(exp):
 	return(output)
 
 def postEval(exp):
-	print('hi',exp) #! DELETE
 	oprStack = []
-	operators = ['/','*','+','-','(']
+	operators = ['/','*','+','-']
 	# read from left to right
 	for item in exp:
-		print('###',item, oprStack)
 		# if operator, eval with last two operands
 		if item in operators:
 			B = oprStack.pop()
@@ -57,9 +55,7 @@ def postEval(exp):
 		# if operands, store
 		else:
 			oprStack.append(int(item))
-			print('opr') #! DELETE	
-	print(oprStack.pop())
-	return(0)
+	return(oprStack.pop())
 
 		
 
@@ -70,6 +66,8 @@ def postEval(exp):
 if __name__ == "__main__":
 	expL = ["1 + 2 * 3 + 4", "( 1 + 2 ) * ( 3 + 4 )", "1 * 2 + 3 * 4", "1 + 2 + 3 + 4"]
 	postL = []
-	for exp1 in expL:
-		postL.append(inToPost(exp1))
-	postEval(postL[0])
+	convertedL = map(inToPost,expL)
+	print(list(convertedL))
+	evalL = map(postEval,convertedL)
+	print(list(evalL))
+

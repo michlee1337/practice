@@ -57,17 +57,11 @@ def postEval(exp):
 			oprStack.append(int(item))
 	return(oprStack.pop())
 
-		
-
-
-
-	print(" ".join(output))
-
 if __name__ == "__main__":
 	expL = ["1 + 2 * 3 + 4", "( 1 + 2 ) * ( 3 + 4 )", "1 * 2 + 3 * 4", "1 + 2 + 3 + 4"]
 	postL = []
-	convertedL = map(inToPost,expL)
-	print(list(convertedL))
-	evalL = map(postEval,convertedL)
-	print(list(evalL))
+	convL = [inToPost(exp) for exp in expL]
+	evalL = [postEval(exp) for exp in convL]
+	print(convL)
+	print(evalL)
 

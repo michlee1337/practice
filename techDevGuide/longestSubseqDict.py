@@ -42,11 +42,11 @@ def isSubSeq(a,b):
     return(False)
 
 def isSubInDict(s,d):
-    longest = None
+    d.sort()
     for word in d:
-        if isSubSeq(word, s) and (longest is None or len(word) > len(longest)):
-            longest = word
-    return(longest)
+        if isSubSeq(word, s):
+            return(word)
+    return(None)
 
 # is a blank string a subseq? can be formed by deletions from b without any reordering so for now I'll assume yes
 

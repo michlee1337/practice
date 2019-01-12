@@ -64,4 +64,3 @@ if __name__ == "__main__":
 	evalL = [postEval(exp) for exp in convL]
 	print(convL)
 	print(evalL)
-

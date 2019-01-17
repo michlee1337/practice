@@ -2,7 +2,7 @@ import time
 import matplotlib.pyplot as plt
 import random
 
-def insertion_time(arr):
+def selection_time(arr):
 	start = time.time()
 	steps = 0
 
@@ -19,7 +19,7 @@ def insertion_time(arr):
 	end = time.time()
 	return([arr,end-start,steps])
 
-def selection_time(arr):
+def insertion_time(arr):
 	start = time.time()
 	steps = 0
 
@@ -67,10 +67,8 @@ if __name__ == "__main__":
 
 	# create list of lists from len 1 to 100
 	testL = []
-	print('here')
 	for i in range(0,n,step_size):
 		testL.append(randList(i,-100,100))
-	print('pass')
 
 	# for each list, run the test and store the number of steps
 	ins_time = [0]*int(n/step_size)
@@ -79,8 +77,8 @@ if __name__ == "__main__":
 	ins_steps = [0]*int(n/step_size)
 	sel_steps = [0]*int(n/step_size)
 	bubb_steps = [0]*int(n/step_size)
+
 	for l in range(len(testL)):
-		print(l)
 		print('\\')
 		_, ins_time[l],ins_steps[l] = insertion_time(testL[l])
 		print('|')
@@ -90,11 +88,13 @@ if __name__ == "__main__":
 		print('-')
 	print('done!')
 
+	# plot the time and steps for each sort
+
 	plt.figure(1)
 	plt.subplot(211)
-	plt.plot(range(int(n/step_size)),ins_time,color="green",label="insertion")
-	plt.plot(range(int(n/step_size)),sel_time,color="red",label="selection")
-	plt.plot(range(int(n/step_size)),bubb_time,color="blue",label="bubble")
+	plt.plot(range(0,n,step_size),ins_time,color="green",label="insertion")
+	plt.plot(range(0,n,step_size),sel_time,color="red",label="selection")
+	plt.plot(range(0,n,step_size),bubb_time,color="blue",label="bubble")
 	plt.legend()
 
 	plt.subplot(212)

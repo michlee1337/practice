@@ -1,6 +1,6 @@
 import time
 
-def insertionSort(arr):
+def SelectionSort(arr):
     for i in range(len(arr[1:])):
         min = i
         for j in range(i+1, len(arr)):
@@ -58,14 +58,40 @@ def mergeSort(arr):
             sorted.append(right_sorted.pop(0))
 
         return(sorted)
-def runTime(function, *arg1):
+
+def runTime(function, *args):
     start = time.time()
-    print(function(*arg1))
+    print(function(*args))
     end = time.time()
     print('time: ',start-end)
 
+def recursive_ins(arr,n):
+    # base case: arr len 1
+    if n <= 0:
+        return(arr,n+1)
+
+    else:
+        # sort list except last
+        n_arr,n = recursive_ins(arr[0:n],n-1)
+
+        # add last back
+        n_arr = n_arr + [arr[n]]
+
+        # sort last into arr
+        for j in range(n-1,-1,-1):
+            if j == 0 or n_arr[n] >= n_arr[j]:
+                n_arr.insert(j,n_arr.pop(n))
+                return(n_arr,n+1)
+
 
 if __name__ == "__main__":
-    runTime(insertionSort,[])
-    runTime(insertionSort,[0])
-    runTime(insertionSort,[23,4,-1,0,399])
+    #runTime(SelectionSort,[])
+    #runTime(SelectionSort,[0])
+    #runTime(SelectionSort,[23,4,-1,0,399])
+    #print(recursive_ins([3,2,1,1,2,3,1],6))
+    #print(recursive_ins([3,2,1],2))
+    print(recursive_ins([3,2,-11],2))
+    print(recursive_ins([],-1))
+    print(recursive_ins([1],0))
+
+

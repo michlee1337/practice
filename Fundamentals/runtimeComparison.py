@@ -46,7 +46,7 @@ def bubble_time(arr):
 	end = time.time()
 	return([arr,end-start,steps])
 
-def merge_time(arr,comps):
+def merge_time(arr,comps=0):
 	x = len(arr)
 	# base casase len arr == 1
 	if x == 1:
@@ -98,7 +98,7 @@ def testLists(num,min,max):
 	return(testL)
 
 if __name__ == "__main__":
-	print(merge_time([-99,1,2,4,0,3,3,2,1],0))
+	print(merge_time([-99,1,2,4,0,3,3,2,1]))
 	'''
 	# number of lists to test
 	n = 10000

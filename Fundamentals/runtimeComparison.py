@@ -46,6 +46,43 @@ def bubble_time(arr):
 	end = time.time()
 	return([arr,end-start,steps])
 
+def merge_time(arr,comps):
+	x = len(arr)
+	# base casase len arr == 1
+	if x == 1:
+		return(arr,comps)
+	else:
+		ret_arr = []
+
+		# recursively sort left and right halves
+		l_arr,_ = merge_time(arr[:int(x/2)],comps)
+		r_arr,_ = merge_time(arr[int(x/2):],comps)
+
+		l_i = 0
+		r_i = 0
+
+		# while there are items in both, compare and append smaller
+		while (l_i < len(l_arr)) and (r_i < len(r_arr)):
+			comps += 1
+			if l_arr[l_i] < r_arr[r_i]:
+				ret_arr.append(l_arr[l_i])
+				l_i += 1
+			else:
+				ret_arr.append(r_arr[r_i])
+				r_i += 1
+
+		# if anything remaining, append
+		while l_i < len(l_arr):
+			ret_arr.append(l_arr[l_i])
+			l_i += 1
+
+		while r_i < len(r_arr):
+			ret_arr.append(r_arr[r_i])
+			r_i += 1
+
+		return(ret_arr,comps)
+
+
 #def testSortAcc(func):
 
 def randList(num,min,max):
@@ -61,6 +98,8 @@ def testLists(num,min,max):
 	return(testL)
 
 if __name__ == "__main__":
+	print(merge_time([-99,1,2,4,0,3,3,2,1],0))
+	'''
 	# number of lists to test
 	n = 10000
 	step_size = 1000
@@ -103,3 +142,5 @@ if __name__ == "__main__":
 	plt.plot(range(0,n,step_size),bubb_steps,color="blue",label="bubble")
 	plt.legend()
 	plt.show()
+
+	'''

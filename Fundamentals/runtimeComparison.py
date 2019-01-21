@@ -4,47 +4,42 @@ import random
 
 def selection_time(arr):
 	start = time.time()
-	steps = 0
+	comps = 0
 
 	for i in range(len(arr[1:])):
 		min = i
-		steps += 1
 		for j in range(i+1, len(arr)):
-			steps += 1
+			comps += 1
 			if arr[j] < arr[min]:
 				min = j
-				steps += 1
 		arr[i],arr[min] = arr[min], arr[i]
-		steps += 3
 	end = time.time()
-	return([arr,end-start,steps])
+	return([arr,end-start,comps])
 
 def insertion_time(arr):
 	start = time.time()
-	steps = 0
+	comps = 0
 
 	for i in range(1,len(arr)):
 		for j in range(0,i):
-			steps += 1
+			comps += 1
 			if arr[j] > arr[i]:
 				arr.insert(j,arr.pop(i))
-				steps += 2 + len(arr)-j
 				break
 	end = time.time()
-	return([arr,end-start,steps])
+	return([arr,end-start,comps])
 
 def bubble_time(arr):
 	start = time.time()
-	steps = 0
+	comps = 0
 
 	for i in range(len(arr)-1,0,-1):
 		for j in range(0,i,1):
-			steps += 1
+			comps += 1
 			if arr[j] > arr[j+1]:
 				arr[j],arr[j+1] = arr[j+1],arr[j]
-				steps += 3
 	end = time.time()
-	return([arr,end-start,steps])
+	return([arr,end-start,comps])
 
 def merge_time(arr,comps=0):
 	x = len(arr)
@@ -55,9 +50,10 @@ def merge_time(arr,comps=0):
 		ret_arr = []
 
 		# recursively sort left and right halves
-		l_arr,_ = merge_time(arr[:int(x/2)],comps)
-		r_arr,_ = merge_time(arr[int(x/2):],comps)
+		l_arr,comp_l = merge_time(arr[:int(x/2)],comps)
+		r_arr,comp_r = merge_time(arr[int(x/2):],comps)
 
+		comps = comps + comp_l + comp_r
 		l_i = 0
 		r_i = 0
 
@@ -98,8 +94,7 @@ def testLists(num,min,max):
 	return(testL)
 
 if __name__ == "__main__":
-	print(merge_time([-99,1,2,4,0,3,3,2,1]))
-	'''
+
 	# number of lists to test
 	n = 10000
 	step_size = 1000
@@ -110,25 +105,32 @@ if __name__ == "__main__":
 		testL.append(randList(i,-100,100))
 
 	# for each list, run the test and store the number of steps
-	ins_time = [0]*int(n/step_size)
-	sel_time = [0]*int(n/step_size)
-	bubb_time = [0]*int(n/step_size)
+	#ins_time = [0]*int(n/step_size)
+	#sel_time = [0]*int(n/step_size)
+	#bubb_time = [0]*int(n/step_size)
 	ins_steps = [0]*int(n/step_size)
 	sel_steps = [0]*int(n/step_size)
 	bubb_steps = [0]*int(n/step_size)
+	merge_steps = [0]*int(n/step_size)
 
 	for l in range(len(testL)):
 		print('\\')
-		_, ins_time[l],ins_steps[l] = insertion_time(testL[l])
+		_, _,ins_steps[l] = insertion_time(testL[l])
 		print('|')
-		_, sel_time[l],sel_steps[l] = selection_time(testL[l])
+		_, _,sel_steps[l] = selection_time(testL[l])
 		print('/')
-		_, bubb_time[l],bubb_steps[l] = bubble_time(testL[l])
+		_, _,bubb_steps[l] = bubble_time(testL[l])
 		print('-')
+		_,merge_steps[l] = merge_time(testL[l])
 	print('done!')
+	print(ins_steps)
+	print(sel_steps)
+	print(bubb_steps)
+	print(merge_steps)
 
 	# plot the time and steps for each sort
 
+	'''
 	plt.figure(1)
 	plt.subplot(211)
 	plt.plot(range(0,n,step_size),ins_time,color="green",label="insertion")
@@ -136,11 +138,12 @@ if __name__ == "__main__":
 	plt.plot(range(0,n,step_size),bubb_time,color="blue",label="bubble")
 	plt.legend()
 
+
 	plt.subplot(212)
+	'''
 	plt.plot(range(0,n,step_size),ins_steps,color="green",label="insertion")
 	plt.plot(range(0,n,step_size),sel_steps,color="red",label="selection")
 	plt.plot(range(0,n,step_size),bubb_steps,color="blue",label="bubble")
+	plt.plot(range(0,n,step_size),merge_steps,color="yellow",label="merge")
 	plt.legend()
 	plt.show()
-
-	'''

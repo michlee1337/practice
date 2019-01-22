@@ -147,3 +147,5 @@ if __name__ == "__main__":
 	plt.plot(range(0,n,step_size),merge_steps,color="yellow",label="merge")
 	plt.legend()
 	plt.show()
+
+	print('merge sort much more efficient aysmptotically. \n Number of steps increases much slower (lower rate of change)')

@@ -95,9 +95,6 @@ def heappop(A):
 	_sift_down(A,0)
 	return(ret,A)
 
-
-
-
 import unittest
 
 class TestHeap(unittest.TestCase):

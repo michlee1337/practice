@@ -45,12 +45,18 @@ def max_heapify(A,i):
 		else: 
 			#right largest, swap with i
 			A[i], A[rightChild(i)] = A[rightChild(i)], A[i]
+			# recurse on new index of focus node
+			max_heapify(A,rightChild(i))
 	elif rightChild (i) > max_ind or A[leftChild(i)] >= A[rightChild(i)]:
 		# left largest, swap with i
 		A[i], A[leftChild(i)] = A[leftChild(i)], A[i]
+		# recurse on new index of focus node
+		max_heapify(A,leftChild(i))
 	else:
 		# right largest, swap with i
 		A[i], A[rightChild(i)] = A[rightChild(i)], A[i]
+		# recurse on new index of focus node
+		max_heapify(A,rightChild(i))
 	return(A)
 
 # build max heap

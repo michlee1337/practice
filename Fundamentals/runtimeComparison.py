@@ -78,9 +78,6 @@ def merge_time(arr,comps=0):
 
 		return(ret_arr,comps)
 
-
-#def testSortAcc(func):
-
 def randList(num,min,max):
 	list = []
 	for num in range(num+1):

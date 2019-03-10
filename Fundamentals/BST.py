@@ -136,16 +136,12 @@ def to_string(root):
 
 def list_insert(lst, value): 
     """inserts value into lst in sorted order"""
-          
-    # Searching for the position 
-    index = 0
+    ind = 0
     for i in range(len(lst)): 
         if lst[i] > value: 
-            index = i 
-            break
-      
-    # Inserting n in the lst 
-    lst = lst[:index] + [value] + lst[index:] 
+            lst.insert(i,value)
+            return lst
+    lst.append(value)
     return lst
             
 def list_delete(lst, value): 
@@ -179,14 +175,20 @@ for x in [Node(random.randint(0,100)) for _ in range(50)]:
         bst = x
     else: 
         insert(bst, x)
-    list_insert(lst, x.data)
-    
+        list_insert(lst, x.data)    
+
 for x in [random.randint(0,100) for _ in range(50)]: 
     bst = delete(bst, x)
     list_delete(lst,x)
+
+print(inorder(bst))
+print(lst)
+
+'''
 
 for x in [random.randint(0,100) for _ in range(50)]: 
     print(x, search_data(bst, x), list_search(lst, x))
     
 print(inorder(bst))
 print(lst)
+'''

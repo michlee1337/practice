@@ -177,6 +177,7 @@ for x in [Node(random.randint(0,100)) for _ in range(50)]:
         insert(bst, x)
         list_insert(lst, x.data)    
 
+
 for x in [random.randint(0,100) for _ in range(50)]: 
     bst = delete(bst, x)
     list_delete(lst,x)

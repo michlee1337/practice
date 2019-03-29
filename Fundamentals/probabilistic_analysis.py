@@ -113,7 +113,7 @@ def getTime(func, reps, *args):
 	for i in range(reps):
 		func(*args)
 	end = time.time()
-	return((end-start)/reps),
+	return((end-start)/reps)
 
 class TestHeap(unittest.TestCase):
 

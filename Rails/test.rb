@@ -7,6 +7,6 @@
 	</head>
 
 	<body>
-		<p><%= content %></p>
+		<p><%= content %>test</p>
 	</body>
 </html>

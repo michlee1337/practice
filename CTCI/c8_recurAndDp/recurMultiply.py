@@ -1,34 +1,30 @@
+
+'''
 import math
 
 def _isPrime(in_int):
-    '''
-    input: int
-    returns: bool
-    '''
     for n in range(math.sqrt(in_int)):
         if in_int%n == 0:
             return(False)
     return(True)
 
 def smallestDivisor(in_int):
-    '''
-    input: int
-    returns: int
-
-    -1 if can't be found
-    '''
     for n in range(2,in_int):
         if in_int%n == 0:
             return(n)
     return(-1)
+'''
+
 
 def recur_multiply(int1, int2):
     '''
     input: int,int
     returns: int
     '''
-    mult_table = {}
-    prime_list = []
+
+    # find closest exponent - is that the right word - of 2
+    # add and subtract difference
+    exponents = 0
 
     # get smaller int
     if int1 < int2:
@@ -39,10 +35,20 @@ def recur_multiply(int1, int2):
         big_int = int1
 
     # break down big int into primes
+    # count number of powers of 2 that fit into big int
+    while big_int % 2 == 0:
+        exponents += 1
+        big_int = big_int >> 1
 
-    # base case, a prime
-    while not _isPrime(big_int):
-        # aw man how do i do this
-        mult_table[smallestDivisor(in_int)] = big_int
-        # try dividing from 2 up
-    # add it by itself x times if x is a prime
+    # multiply small int by that power
+    sol = small_int << exponents
+
+    # then add the number of times of remaining big_int
+    for _ in range(big_int-1):
+        sol += small_int
+    return(sol)
+
+if __name__=="__main__":
+    int1 = int(input("int 1: "))
+    int2 = int(input("int 2: "))
+    print(recur_multiply(int1,int2))

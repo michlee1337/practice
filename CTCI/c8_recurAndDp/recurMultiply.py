@@ -1,20 +1,38 @@
 
-'''
-import math
+# helper: multiply int by multiplier
+### keeps original params of main the same
+def multiply_by(int, multiplier):
+    '''
+    input: int,int
+    returns: int
+    '''
+    print(int, multiplier)
+    res = int
+    print('r', res)
 
-def _isPrime(in_int):
-    for n in range(math.sqrt(in_int)):
-        if in_int%n == 0:
-            return(False)
-    return(True)
+    # base case: if multiplier is 1, return int
+    if multiplier == 1:
+        pass
 
-def smallestDivisor(in_int):
-    for n in range(2,in_int):
-        if in_int%n == 0:
-            return(n)
-    return(-1)
-'''
+    # base case: if the multiplier is 2, left shift
+    elif multiplier == 2:
+        print('m is 2')
+        res = res << 1
+        print('r', res)
 
+    # else: left shift and deduct 2 from multiplier, check again
+    else:
+        print('calling min')
+        res = res << 1
+        multiplier -= 2
+        print('r', res)
+        res += multiply_by(int, multiplier)
+        print('r', res)
+    return(res)
+
+    # else
+
+    return(1)
 
 def recur_multiply(int1, int2):
     '''
@@ -22,11 +40,7 @@ def recur_multiply(int1, int2):
     returns: int
     '''
 
-    # find closest exponent - is that the right word - of 2
-    # add and subtract difference
-    exponents = 0
-
-    # get smaller int
+    # set larger int as multiplier
     if int1 < int2:
         small_int = int1
         big_int = int2
@@ -34,19 +48,8 @@ def recur_multiply(int1, int2):
         small_int = int2
         big_int = int1
 
-    # break down big int into primes
-    # count number of powers of 2 that fit into big int
-    while big_int % 2 == 0:
-        exponents += 1
-        big_int = big_int >> 1
-
-    # multiply small int by that power
-    sol = small_int << exponents
-
-    # then add the number of times of remaining big_int
-    for _ in range(big_int-1):
-        sol += small_int
-    return(sol)
+    res = multiply_by(small_int, big_int)
+    return(res)
 
 if __name__=="__main__":
     int1 = int(input("int 1: "))

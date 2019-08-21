@@ -6,9 +6,7 @@ def multiply_by(int, multiplier):
     input: int,int
     returns: int
     '''
-    print(int, multiplier)
     res = int
-    print('r', res)
 
     # base case: if multiplier is 1, return int
     if multiplier == 1:
@@ -16,23 +14,15 @@ def multiply_by(int, multiplier):
 
     # base case: if the multiplier is 2, left shift
     elif multiplier == 2:
-        print('m is 2')
         res = res << 1
-        print('r', res)
 
     # else: left shift and deduct 2 from multiplier, check again
-    else:
-        print('calling min')
+    while multiplier >= 2:
         res = res << 1
         multiplier -= 2
-        print('r', res)
-        res += multiply_by(int, multiplier)
-        print('r', res)
+
+    res += multiply_by(int, multiplier)
     return(res)
-
-    # else
-
-    return(1)
 
 def recur_multiply(int1, int2):
     '''

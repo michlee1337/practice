@@ -8,7 +8,7 @@ def insertAll(str, char):
 def permUniq(str):
     # trivial base: permutation of one char is the char
     if len(str) == 1:
-        return([str,""])
+        return([str])
 
     # iterative step: insert char into all positions in all unique permutations
     else:
@@ -17,7 +17,7 @@ def permUniq(str):
 
         for perm in perm_wo:
             perm_w += insertAll(perm,str[0])
-        return(perm_wo + perm_w + [str[0]])
+        return(perm_w)
 
 if __name__=="__main__":
     str = input("your str: ")

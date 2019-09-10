@@ -3,6 +3,7 @@ import ast
 
 class Solution:
     maxDays = 0
+    memo = []
 
     def maxVacation(self, flights, days):
         '''
@@ -16,7 +17,27 @@ class Solution:
         '''
 
         # brute force: try every possible permutation, that's O(n!) time
-        return(self._findMaxVacation(flights, days, 0, 0, 0))
+
+        # memo where [i][j] shows max days from i city in j+1 week
+        Solution.memo = [[-1 for _ in (enumerate(days[0]))] for _ in enumerate(flights)]
+        for i,_ in enumerate(Solution.memo):
+            Solution.memo[i][-1] = days[i][0]
+        return(self._findMaxVacationDp(flights, days, 0, 0, 0))
+
+    def _findMaxVacationDp(self, flights, days, city, week,curDays):
+        # if no more weeks, return curDays
+        if week == len(days[0]):
+            Solution.maxDays = curDays
+            return(curDays)
+
+        # else return corresponding memo (fill if necessary)
+        else:
+            if Solution.memo[city][week] == -1:
+                for i,_ in enumerate(flights):
+                    if (i == city or flights[city][i]):
+                        possibleDays = days[city][week] + self._findMaxVacationDp(flights, days, i, week + 1, curDays + days[i][week])
+                        Solution.memo[city][week] = max(possibleDays, Solution.memo[city][week])
+            return(Solution.memo[city][week])
 
     def _findMaxVacation(self, flights, days, city, week, curDays):
         # base case: if week = last week, end and remember the max value of this path
@@ -27,6 +48,7 @@ class Solution:
         else:
             for i,_ in enumerate(flights):
                 if (i == city or flights[city][i]):
+                    ####if Solution.memo != -1:
                     self._findMaxVacation(flights, days, i, week + 1, curDays + days[i][week])
 
         # dp
@@ -43,5 +65,4 @@ if __name__=="__main__":
     print("flights: ", flights)
     print("days: ", days)
     sol = Solution()
-    sol.maxVacation(flights, days)
-    print(Solution.maxDays)
+    print(sol.maxVacation(flights, days))

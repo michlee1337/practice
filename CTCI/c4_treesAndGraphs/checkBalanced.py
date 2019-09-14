@@ -10,21 +10,20 @@ def nodeHeight(node):
     if node == None:
         return 0
     else:
-        return(max(nodeHeight(node.left),nodeHeight(node.right))+1)
+        l_height = nodeHeight(node.left)
+        r_height = nodeHeight(node.right)
+        if (abs(l_height - r_height) > 1):
+            raise ValueError('Tree Unbalanced')
+        else:
+            return(max(l_height,r_height)+1)
 
 def checkBalanced(node):
     #base case: if leaf, return true
-    if node.left == None and node.right == None:
+    try:
+        nodeHeight(node)
         return(True)
-    # else, check if self and children are balanced
-    if node.left and not checkBalanced(node.left):
-        print(node.left.val)
+    except:
         return(False)
-    if node.right and not checkBalanced(node.right):
-        print(node.right.val)
-        return(False)
-    print(node.val, abs(nodeHeight(node.left) - nodeHeight(node.right)))
-    return(abs(nodeHeight(node.left) - nodeHeight(node.right)) <= 1)
 
 if __name__=="__main__":
     root1 = Node(0)

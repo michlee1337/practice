@@ -17,6 +17,19 @@ def removeDups(root):
             node = node.next
     return(root)
 
+def removeDupsConstantSpace(root):
+    # for each node
+    while root.next != None:
+        # for each subsequent node
+        node = root.next
+        while node.next != None:
+            # if dup, remove
+            if node.next.val == root.val:
+                node.next = node.next.next
+            node = node.next
+        root = root.next
+    return(root)
+
 # for testing
 def printLL(root):
     list = []
@@ -33,7 +46,7 @@ if __name__=="__main__":
         node.next = Node(i)
         node = node.next
     printLL(root)
-    removeDups(root)
+    removeDupsConstantSpace(root)
     printLL(root)
 
     root1 = Node(0)
@@ -42,5 +55,5 @@ if __name__=="__main__":
         node1.next = Node(i)
         node1 = node1.next
     printLL(root1)
-    removeDups(root1)
+    removeDupsConstantSpace(root1)
     printLL(root1)

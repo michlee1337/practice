@@ -1,6 +1,6 @@
+# ugh still broken
+
 class Solution():
-    #def bstSeq(self,root):
-    #    vals = []
     def bstSeq(self, root):
         if root == None:
             return([[]])
@@ -42,13 +42,10 @@ if __name__=="__main__":
     n4 = Node(4)
     n5 = Node(5)
     n6 = Node(6)
-    n7 = Node(7)
-    n2.left = n1
-    n2.right = n3
-    n3.right = n4
-    n4.right = n5
-    n1.left = n6
-    n1.right = n7
+    n1.left = n2
+    n1.right = n3
+    n2.left = n4
+    n2.right = n5
+    n3.left = n6
     test = Solution()
-    #print(test.doWeave([1,2],[],[],[]))
-    print(test.bstSeq(n2))
+    print(test.bstSeq(n1))

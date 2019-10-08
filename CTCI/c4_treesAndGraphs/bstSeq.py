@@ -1,4 +1,4 @@
-# ugh still broken
+# ugh still borken
 
 class Solution():
     def bstSeq(self, root):
@@ -21,12 +21,9 @@ class Solution():
     def doWeave(self,l1,l2,prefix,weaves):
         if len(l1) == 0 or len(l2) == 0:
             weaves.append(prefix + l1 + l2)
-        if len(l1) != 0:
-            weaves = self.doWeave(l1[1:],l2, prefix + [l1[0]], weaves)
-
-        if len(l2) != 0:
-            weaves = self.doWeave(l1,l2[1:], prefix + [l2[0]], weaves)
-
+        else:
+            self.doWeave(l1[1:],l2, prefix + [l1[0]], weaves)
+            self.doWeave(l1,l2[1:], prefix + [l2[0]], weaves)
         return(weaves)
 
 class Node():

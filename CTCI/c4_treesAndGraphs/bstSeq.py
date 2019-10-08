@@ -1,27 +1,33 @@
-def bstSeq(root):
-    if root == None:
-        return([[]])
-    if root.left == None and root.right == None:
-        return([[root.val]])
+class Solution():
+    #def bstSeq(self,root):
+    #    vals = []
+    def bstSeq(self, root):
+        if root == None:
+            return([[]])
+        if root.left == None and root.right == None:
+            return([[root.val]])
 
-    # each seq is
-    # root + left + right + rest
-    # root + right + left + rest
+        seq_left = self.bstSeq(root.left)
+        seq_right = self.bstSeq(root.right)
 
-    # left and right can have many sequences
-    seq = []
+        if len(seq_left) == 0 and len(seq_right) == 0:
+            return([[root.val]])
 
-    seq_left = bstSeq(root.left)
-    seq_right = bstSeq(root.right)
-    print(seq_left,seq_right)
+        for l in seq_left:
+            for r in seq_right:
+                weaves = self.doWeave(l,r,[root.val],[])
+        return(weaves)
 
-    for l in seq_left:
-        for r in seq_right:
-            seq.append([root.val] + l + r)
-            if l != [] and r != []:
-                seq.append([root.val] + r + l)
+    def doWeave(self,l1,l2,prefix,weaves):
+        if len(l1) == 0 or len(l2) == 0:
+            weaves.append(prefix + l1 + l2)
+        if len(l1) != 0:
+            weaves = self.doWeave(l1[1:],l2, prefix + [l1[0]], weaves)
 
-    return(seq)
+        if len(l2) != 0:
+            weaves = self.doWeave(l1,l2[1:], prefix + [l2[0]], weaves)
+
+        return(weaves)
 
 class Node():
     def __init__(self,val):
@@ -43,4 +49,6 @@ if __name__=="__main__":
     n4.right = n5
     n1.left = n6
     n1.right = n7
-    print(bstSeq(n2))
+    test = Solution()
+    #print(test.doWeave([1,2],[],[],[]))
+    print(test.bstSeq(n2))

@@ -28,27 +28,42 @@ ______
 
 # Gotchas
 - UNDERSTANDING
-  - what inputs does it take (edge cases)
+  - what inputs does it take
+    - don't assume!!
+    - sorted?
+    - edge case?
   - what type should the func return (int count? array?)
   - what should the func return if empty input?
+
 - DESIGNING SOLUTION
   - [if base case] What should base case be, 0 or -inf?
   - infinite loops (increasing counter?)
   - check index bounds (not less than 0, not more than length)
   - handle edge cases!
+  - try not to overcomplicate! if stuck. pause for a second.
+- TRAVERSALS
+  - loops
+- RANGES
+  - from i to j is range(i:j+1)
 - EDGE CASES
   - empty inputs
   - duplicates (when searching/ sorting/ storing)
   - negative numbers
-- CONFUSION
+  - zeros/ duplicates of zeros
+- HELPERS
   - if declaring helpers, make sure to not confuse helpers with main, and call/define w self if necessary
-  - indexes/ pointers
+  - if changing params/name, check all instances
+- INDEXES
+    - stop when >= len()
     - off by one
     - confusing between pointers/ indexes
     - concat vs append
     - careful with 2d arrays (brackets + index order)
     - ind (starting from 0 or 1), esp memo
-  - equality is == (oops)
+    - if segmenting by indexes, remember the diff between 0 and sInd, -1 and eInd
+  - EQUALITY CHECKS
+    - equality is == (oops)
+    - <, >, is stuff on the right side
   - node.val, not node!
 
 # Linked List
@@ -166,6 +181,15 @@ Limited input set
 - flipping between cases?
   - max/min; negative/positive
   - store what you need for both cases; a boolean flag state
+- dp: memoizing
+  - what is the problem structure? whats repeated?
+  - what dimensions along which do the problems change? how do they match?
+- if traversing/ searching graph/ Backtracking
+  - lookout for loops. use a seen lookup.
+
+# Bits
+- x&(x-1) flips the last 1 to 0
+
 
 # Questions
 ## Stock
@@ -179,3 +203,8 @@ Limited input set
     - memo[i][0] = 0 # can't sell on first day
     - memo[i][j] = max(memo[i][j-1],price[j]-price[m]+memo[i-1][m])
       - # max of not doing anything vs profit buying on m, selling on j + profit with one less transaction ending before m day
+
+# Design Patterns
+- Composition over Inheritence
+  - take state as function parameters.
+  - "Has a" vs "Is a", but favor composition

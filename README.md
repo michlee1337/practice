@@ -1,4 +1,18 @@
-Disclaimer: I'll tidy this up at some point...
+#! to review
+!! i still don't get the increasing substring q
+? is setting a whole row faster than setting each element?
+!? why doesn't the factor approach work for sqrt
+? how to know when to use binary search (sqrt q)
+  - searching in one dimension
+! learn graphs and search/ traversal better
+!! I think i need to do an algorithms course :P
+
+!! with recusive/ search problems (often searches are recursive problems)
+- find a dimension you can break down along
+  - ex: longest subarray: subarrays of len x
+  - watch .006 on DP
+!! Greedy: see if its possible. strictly increasing/ monotonous things normally make it possible
+
 ______
 
 # General Approach
@@ -7,7 +21,7 @@ ______
     2. Outputs
     3. One walkthrough example: so X returns Y?
     4. Edge cases?
-2. draw out the problem
+    5. draw out the problem
 3. Formulate approach
     1. Brute force
     2. What is the core thing that needs to be mutated/ changed?
@@ -34,7 +48,6 @@ ______
     - edge case?
   - what type should the func return (int count? array?)
   - what should the func return if empty input?
-
 - DESIGNING SOLUTION
   - [if base case] What should base case be, 0 or -inf?
   - infinite loops (increasing counter?)
@@ -61,10 +74,15 @@ ______
     - careful with 2d arrays (brackets + index order)
     - ind (starting from 0 or 1), esp memo
     - if segmenting by indexes, remember the diff between 0 and sInd, -1 and eInd
+    -
   - EQUALITY CHECKS
     - equality is == (oops)
     - <, >, is stuff on the right side
   - node.val, not node!
+
+# Questions
+- How can I tell when the entire search space needs to be searched? no heuristic? (ex: coin change)
+
 
 # Linked List
 Benefits
@@ -123,6 +141,7 @@ Limited input set
 - duplicate values! Esp with lookup tables
 - binary trees != binary search trees
 - edge cases: 0,1, None, boundaries
+- recursion is not constant space
 
 # Backtracking
 - Use case
@@ -161,6 +180,8 @@ Limited input set
 - left child is <, right child is >
 
 # Techniques
+- Always try recursion first C:
+  - Makes it way easier haha
 - Base case and build
   - Trivial solution?
   - Reducing Step?
@@ -190,6 +211,9 @@ Limited input set
 # Bits
 - x&(x-1) flips the last 1 to 0
 
+# Dutch Partitioning Problem (partition 3)
+- pointer to each partition
+- swap pointer values as necessary and increment pointers
 
 # Questions
 ## Stock

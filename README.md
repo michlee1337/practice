@@ -162,7 +162,8 @@ Limited input set
 # Kanade's (Maximum subarray)
 - max at index i is max(s[i], maxSubarr(s[:i]) + s[i])
 
-# Patterns
+# Heuristics for Time complexity
+- sorted: O(lg) O(1)
 
 # Substr
 - sliding window

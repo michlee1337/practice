@@ -12,6 +12,7 @@
   - ex: longest subarray: subarrays of len x
   - watch .006 on DP
 !! Greedy: see if its possible. strictly increasing/ monotonous things normally make it possible
+!! get familiar w bfs vs dfs in perms and other scenarios
 
 ______
 
@@ -142,6 +143,7 @@ Limited input set
 - binary trees != binary search trees
 - edge cases: 0,1, None, boundaries
 - recursion is not constant space
+- search: update and traversal order! Often update before traverse.
 
 # Backtracking
 - Use case
@@ -233,3 +235,13 @@ Limited input set
 - Composition over Inheritence
   - take state as function parameters.
   - "Has a" vs "Is a", but favor composition
+
+# Java
+- static typing
+- structure through braces and semicolons
+- No dictionary! Map
+- char -> int: Character.getNumericValue()
+- for loop: for(var i; i<ending_condintion,increment){};
+- no nested functions
+- Change string to char array: .toCharArray();
+- indexing strings: .charAt(i);

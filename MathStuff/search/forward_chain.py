@@ -3,33 +3,36 @@ Implement a forward chaining solver in Python for ascertaining the truth of a sy
 
 
 '''
+
 from collections import defaultdict
-
-class Symbol():
-    def __init__(self, sym):
-        self.sym = sym
-
 class DefiniteClause():
     def __init__(self, body, head):
         self.body = body
         self.head = head
 
-def fc(kb, q):
+
+def fc(kb):
     count = defaultdict(int)
     inferred = defaultdict(bool)
     agenda = []
+
+    closed = [] # remember everything that is true
+
     for c in kb:
-        if c.body = True:
+        if c.body == [True]:
             agenda.insert(0,c)
+        else:
+            count[c] = len(c.body)
 
     while agenda:
         p = agenda.pop()
-        if p == q: return (True)
-        elif not inferred[p]:
+        closed.append(p.head)
+        #if p == q: return (True)
+        if not inferred[p]:
             inferred[p] = True
             for c in kb:
-                if p in c.body:
+                if p.head in c.body:
                     count[c] -= 1
                     if count[c] == 0:
                         agenda.insert(0,c)
-    return(False)
+    return(closed)

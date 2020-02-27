@@ -19,7 +19,7 @@ def fc(kb):
     closed = [] # remember everything that is true
 
     for c in kb:
-        if c.body == [True]:
+        if len(c.body) == 0:
             agenda.insert(0,c)
         else:
             count[c] = len(c.body)

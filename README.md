@@ -13,7 +13,7 @@
   - watch .006 on DP
 !! Greedy: see if its possible. strictly increasing/ monotonous things normally make it possible
 !! get familiar w bfs vs dfs in perms and other scenarios
-
+?? How can I tell when the entire search space needs to be searched? no heuristic? (ex: coin change)
 ______
 
 # General Approach
@@ -38,8 +38,8 @@ ______
 6. Time complexity + space complexity
 7. Optimize
     1. Bottlenecks (longest time step)
-    2. Unnecessary work (unnecessary work)
-    3. Duplicated work
+    2. Unnecessary work (avoid)
+    3. Repeated work (caches)
 
 # Gotchas
 - UNDERSTANDING
@@ -81,9 +81,8 @@ ______
     - <, >, is stuff on the right side
   - node.val, not node!
 
-# Questions
-- How can I tell when the entire search space needs to be searched? no heuristic? (ex: coin change)
-
+# General Knowledge/ Hueristics
+- comparison based sorting algorithms are lower bounded by nlgn
 
 # Linked List
 Benefits
@@ -145,6 +144,10 @@ Limited input set
 - recursion is not constant space
 - search: update and traversal order! Often update before traverse.
 
+# Recursion
+- whenever you have optimal substructure
+- always consider bottom up (save stack space)
+
 # Backtracking
 - Use case
     - Graph search
@@ -172,11 +175,16 @@ Limited input set
 
 # Array/ Tree/ List
 - often recursion
+  - always focus on a node (operations are on a node)
 - what type of traversal do you need?
 
 ## weaknesses
 - trees, parents and children (what to do without parent connections)
   - work with children
+
+## serialize/ deserialize a tree
+- serialize: if none x, do left do self do right
+- deserialize: if x, none and return, do left do self do right
 
 # BST
 - use the BST property
@@ -245,3 +253,78 @@ Limited input set
 - no nested functions
 - Change string to char array: .toCharArray();
 - indexing strings: .charAt(i);
+
+
+# Kitchen Sink
+- list index == num smaller than
+- sort one list by another
+  - lambda sort, or dict lookup
+- dicts: setdefault
+- List
+  - split each char List(s)
+  - split by seperator s.split(<sep>)
+  - when indexing, always check for empty first
+- custom comparator: neg = left first
+- how to convert comp to key?
+- join is a _string_ method!
+- tree? recurse
+- always forget: _duplicatessss_
+- always check none
+- trees: careful w comp parent or child
+- backtrackinggggg
+- level order traversal: pre traversal
+https://leetcode.com/problems/binary-tree-level-order-traversal/discuss/114449/A-general-approach-to-level-order-traversal-questions-in-Java
+
+# Kth Smallest
+- algorithm
+  - min heap of elements from the first breakdown
+    - + row and col number
+  - k times
+    - get min element from min heap
+    - replace root w the next element from same col and min heapify
+    - return last extracted root
+- intuition
+  - take advantage of the sorted, while sorting between cols
+  - need to sort within cols = need to maintain some sorted structure of cols
+  - sorted cols = always only need to check top col
+
+switch between two "threads of logic"
+- two recursive functions, one calls the other
+  - less checks at each stage
+
+# KMP
+- Problem: pattern matching a term t in a string s
+- Key: take advantage of successful character matches
+- Application: Find a suffix (of matched subterm) that is also a prefix
+  - optimise by building a prefix suffix table
+    - list element i tells us the longest prefix suffix match for substring t[:i]
+
+# Graph
+
+## Djikstra
+- find shortest path tree
+- greedy
+- DP: keep a priority queue of minimum distance to each path from start node
+  - init
+    - with 0 for start node, infinity for all others
+    - mark all nodes as unexplored
+    - mark parents as unknown
+  - while not goal
+    - process top of priority queue
+    - update all children of nodes adjacent with best path (distance + parent)  
+
+## Prim's
+- find minimum spanning tree
+  - connect all nodes, with minimum total cost
+- greedy
+- consider all edges reachable from currently reachable nodes
+- while not all nodes reachable
+  - choose the minimum
+  - remove all edges that connect two already reachable nodes
+  - update edges reachable
+
+# Pretty
+- memoize with a decorator :)
+
+
+min path: uniform cost search (if admissable)

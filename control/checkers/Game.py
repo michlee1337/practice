@@ -1,22 +1,71 @@
 from Agent import *
 from Board import *
 
-class Move:
-    def __init__(self, start_position, end_position, board):
-        self.difficulty = difficulty
-        # smtg about heuristics
 class Game:
+    '''
+    A checkers game with a Command Line Interface.
+
+    Attributes
+        - board
+        - difficulty
+        - agent
+        - isAgentTurn: True if it is currently the Agent's turn
+
+    Methods
+        - checkWin: Check if someone won on the last move.
+        - play: Play a move in the game.
+    '''
     depth_lookup = {
         1: 3,
         2: 5,
-        3: 10
-    } # might be tweaked
+        3: 8
+    }
 
-    def __init__(self, heuristic = 0):
+    def __init__(self):
         self.board = Board()
         self.difficulty = self._getDifficulty()
-        self.agent = Agent(Game.depth_lookup[self.difficulty], heuristic)
+        self.agent = Agent(Game.depth_lookup[self.difficulty], self._getHeuristic())
         self.isAgentTurn = False # start on human turn
+
+    def checkWin(self):
+        '''
+        Check if someone won on the last move.
+        Output: <Boolean>
+        '''
+        return self.board.noPieces(not self.isAgentTurn)
+
+    def play(self):
+        '''
+        Play one move of the game
+        '''
+        print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+
+        if self.isAgentTurn: # agent turn
+            print("My Turn!")
+            self.board = self._getAgentMove()
+        else:
+            print("Your Turn!")
+            self.board = self._getHumanMove()
+        print("Board is now: {}".format(self.board))
+
+        if self.checkWin():
+            print("Game Over")
+            if self.isAgentTurn:
+                print("You lost... Try again?")
+            else:
+                print("You won!! Try a harder game?")
+            return 0
+        else:
+            self.isAgentTurn = not self.isAgentTurn # change turns
+            return self.play()
+
+    def _getHeuristic(self):
+        while True:
+            h = eval(input("What heuristic? (0: simple count, 1: weight kings, 2: weight kings & edges) "))
+            if h == 1 or h == 2 or h == 3:
+                break
+            print("Please enter an integer between 0 and 2")
+        return h
 
     def _getDifficulty(self):
         diff = 0
@@ -44,28 +93,3 @@ class Game:
                 break
             print("Please choose a valid move!")
         return(possibles[m])
-
-    def checkWin(self, forAgent):
-        return self.board.noPieces(not forAgent)
-
-    def play(self):
-        print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-
-        if self.isAgentTurn: # agent turn
-            print("My Turn!")
-            self.board = self._getAgentMove()
-        else:
-            print("Your Turn!")
-            self.board = self._getHumanMove()
-        print("Board is now: {}".format(self.board))
-
-        if self.checkWin(self.isAgentTurn):
-            print("Game Over")
-            if self.isAgentTurn:
-                print("You lost... Try again?")
-            else:
-                print("You won!! Try a harder game?")
-            return 0
-        else:
-            self.isAgentTurn = not self.isAgentTurn # change turns
-            return self.play()

@@ -1,4 +1,16 @@
 class Piece:
+    '''
+    A checkers piece.
+
+    Attributes
+        - belongsToAgent <Boolean>: True if the piece belongs to Agent
+        - isKing <Boolean>: True if the piece is a King.
+
+    Methods
+        - crown: makes the piece a King piece.
+        - getDirs: returns the directions that the piece can move.
+    '''
+
     def __init__(self, belongsToAgent, isKing=False):
         self.belongsToAgent = belongsToAgent
         self.isKing = isKing

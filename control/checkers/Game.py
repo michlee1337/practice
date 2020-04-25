@@ -1,5 +1,6 @@
 from Agent import *
 from Board import *
+from random import randint
 
 class Game:
     '''
@@ -10,7 +11,7 @@ class Game:
         - difficulty
         - agent
         - isAgentTurn: True if it is currently the Agent's turn
-
+        - DEBUG: set to True to make Agent play against RNG.
     Methods
         - checkWin: Check if someone won on the last move.
         - play: Play a move in the game.
@@ -21,11 +22,25 @@ class Game:
         3: 8
     }
 
-    def __init__(self):
+    def __init__(self, difficulty=None,heuristic=None, DEBUG=False):
+        if difficulty is None:
+            difficulty = self._getDifficulty()
+        if heuristic is None:
+            heuristic = self._getHeuristic()
         self.board = Board()
-        self.difficulty = self._getDifficulty()
-        self.agent = Agent(Game.depth_lookup[self.difficulty], self._getHeuristic())
+        self.difficulty = difficulty
+        self.agent = Agent(Game.depth_lookup[self.difficulty], heuristic)
         self.isAgentTurn = False # start on human turn
+        self.winner = 0
+        self.DEBUG = DEBUG
+
+    def checkDraw(self):
+        '''
+        Check if current player can't move.
+        Output: <Boolean>
+        '''
+        possibles = self.board.next_boards()
+        return len(possibles) == 0
 
     def checkWin(self):
         '''
@@ -39,10 +54,12 @@ class Game:
         Play one move of the game
         '''
         print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-
         if self.isAgentTurn: # agent turn
             print("My Turn!")
             self.board = self._getAgentMove()
+        elif self.DEBUG:
+            print("nani")
+            self.board = self._getRandMove()
         else:
             print("Your Turn!")
             self.board = self._getHumanMove()
@@ -51,10 +68,15 @@ class Game:
         if self.checkWin():
             print("Game Over")
             if self.isAgentTurn:
+                self.winner = 1
                 print("You lost... Try again?")
             else:
+                self.winner = -1
                 print("You won!! Try a harder game?")
             return 0
+        elif self.checkDraw():
+            print("It's a draw! Tiebreaker?")
+            self.winner = 0
         else:
             self.isAgentTurn = not self.isAgentTurn # change turns
             return self.play()
@@ -75,6 +97,10 @@ class Game:
                 break
             print("Please enter an integer between 1 and 3")
         return diff
+
+    def _getRandMove(self):
+        possibles = self.board.next_boards()
+        return possibles[randint(0,len(possibles)-1)]
 
     def _getAgentMove(self):
         return self.agent.move(self.board)

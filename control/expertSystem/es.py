@@ -39,4 +39,4 @@ prolog.consult("es.pl") # open the KB for consulting
 
 call(retractall(known))
 action = [s for s in prolog.query("action(X).", maxresult=1)]
-print("Your should " + (action[0]['X'] + "." if action else "unknown."))
+print("You should " + (action[0]['X'] + "." if action else "hang tight."))

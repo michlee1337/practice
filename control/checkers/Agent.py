@@ -69,7 +69,7 @@ class Agent:
     # internal helper: gets max next state
     def _getMax(self,board,a,b,d):
         if d == self.max_depth:
-            return(None, self._utility(board))
+            return(board, self._utility(board))
         v = -float("inf")
         best_move = None
         for next_board in board.next_boards():
@@ -85,7 +85,7 @@ class Agent:
     # internal helper: gets min next state
     def _getMin(self,board,a,b,d):
         if d == self.max_depth:
-            return(None, self._utility(board))
+            return(board, self._utility(board))
         v = float("inf")
         best_move = None
         for next_board in board.next_boards():

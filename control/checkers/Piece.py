@@ -17,3 +17,11 @@ class Piece:
     def crown(self):
         self.isKing = True
         return(0)
+
+    def getDirs(self):
+        if self.isKing:
+            return [(1,-1),(1,1),(-1,-1),(-1,1)]
+        elif self.belongsToAgent:
+            return [(1,-1),(1,1)]
+        else:
+            return [(-1,-1),(-1,1)]

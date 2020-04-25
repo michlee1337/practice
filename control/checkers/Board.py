@@ -108,17 +108,10 @@ class Board:
                     return self._doCaptureMoves(nstate,piece, rn+rd, cn+cd, True) # recurse to complete all captures
             return []
 
-        if piece.isKing:
-            dirs = [(1,-1),(1,1),(-1,-1),(-1,1)] # left up, right up, left down, right down
-        elif piece.belongsToAgent:
-            dirs = [(1,-1),(1,1)]
-        else:
-            dirs = [(-1,-1),(-1,1)]
-
         nstates = []
 
         # handle kings
-        for rd,cd in dirs:
+        for rd,cd in piece.getDirs():
             if piece.isKing:
                 #for k in range(1,min(rowDist[rd], colDist[cd]),1):
                 for k in range(1, 8):
@@ -130,7 +123,6 @@ class Board:
                 cn = c+cd
                 nstates += omnom(state,piece,r,c,rn,cn,rd,cd)
 
-
         # base case: if no more captures possible but have captured before, return self
         if len(nstates) == 0 and captured:
             return([state])
@@ -140,12 +132,9 @@ class Board:
     def _doSimpleMoves(self, state, piece, r, c):
         # moves based on whose piece it is
         # EXT: haha i really need to abstract this out
-        dirs = {
-            False: [(-1,-1),(-1,1)],
-            True: [(1,-1),(1,1)]
-        }
+
         nstates = []
-        for rd,cd in dirs[piece.belongsToAgent]:
+        for rd,cd in piece.getDirs():
             rn = r+rd
             cn = c+cd
             # EXT: a board cell should be an object and blank/ piece are subclasses

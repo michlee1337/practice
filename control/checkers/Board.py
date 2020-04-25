@@ -98,10 +98,12 @@ class Board:
                 nstate = copy.deepcopy(state) # references begone!
                 nstate[rn][cn] = 0 # eat
                 nstate[r][c], nstate[rn+rd][cn+cd] = 0, nstate[r][c] # move
-                if piece.belongsToAgent and rn+rd == 0:
-                    piece.crown() # become king
-                elif not piece.belongsToAgent and rn+rd == 7:
-                    piece.crown() # become king
+                if nstate[rn+rd][cn+cd].belongsToAgent and rn+rd == 7:
+                    nstate[rn+rd][cn+cd].crown() # become king
+                    return([nstate])
+                elif not nstate[rn+rd][cn+cd].belongsToAgent and rn+rd == 0:
+                    nstate[rn+rd][cn+cd].crown() # become king
+                    return([nstate])
                 else:
                     return self._doCaptureMoves(nstate,piece, rn+rd, cn+cd, True) # recurse to complete all captures
             return []
@@ -122,7 +124,7 @@ class Board:
         # handle kings
         for rd,cd in dirs:
             if piece.isKing:
-                for k in range(1,min(rowDist[rd], colDist[c]),1):
+                for k in range(1,min(rowDist[rd], colDist[cd]),1):
                     rn = r+rd*k
                     cn = c+cd*k
                     nstates += omnom(state,piece,r,c,rn,cn,rd,cd)
@@ -153,9 +155,9 @@ class Board:
             if rn >= 0 and cn >= 0 and rn<=7 and cn<=7 and state[rn][cn] == 0:
                 nstate = copy.deepcopy(state) # references begone!
                 nstate[r][c], nstate[rn][cn] = nstate[rn][cn], nstate[r][c]
-                if piece.belongsToAgent and rn == 0:
+                if piece.belongsToAgent and rn == 7:
                     piece.crown()
-                elif not piece.belongsToAgent and rn == 7:
+                elif not piece.belongsToAgent and rn == 0:
                     piece.crown()
                 nstates.append(nstate)
         return(nstates)

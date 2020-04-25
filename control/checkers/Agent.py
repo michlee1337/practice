@@ -1,7 +1,7 @@
 class Agent:
     '''
     A depth limited minimax search agent with alpha beta pruning.
-    reference: AI modern approach
+    Based on Russell, S., & Norvig, P. (2002). Artificial intelligence: a modern approach.
 
     Attributes:
         - max_depth: the max depth of the minimax search

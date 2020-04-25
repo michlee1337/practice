@@ -40,18 +40,18 @@ class Agent:
             if piece == 0:
                 return(0)
             elif piece.belongsToAgent:
-                return(1+7*piece.isKing)
+                return(simpleBalance()+10*piece.isKing)
             else:
-                return(-1-7*piece.isKing)
+                return(simpleBalance()-10*piece.isKing)
 
         def kingsAndEdges():
             edges = [0,7]
             if piece == 0:
                 return(0)
             elif piece.belongsToAgent:
-                return(1 + 7*piece.isKing + sum([1 for i in [r,c] if i in edges]))
+                return(weightedKings() + sum([2 for i in [r,c] if i in edges]))
             else:
-                return(-1-7*piece.isKing - sum([1 for i in [r,c] if i in edges]))
+                return(weightedKings() - sum([2 for i in [r,c] if i in edges]))
 
         heuristics = {
         0: simpleBalance,
@@ -64,7 +64,6 @@ class Agent:
             for c, piece in enumerate(row):
                 utility += heuristics[self.heuristic]()
         return utility
-
 
     # internal helper: gets max next state
     def _getMax(self,board,a,b,d):

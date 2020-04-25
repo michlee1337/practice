@@ -31,6 +31,7 @@ class Game:
         return self.board.noPieces(not forAgent)
 
     def play(self):
+        print("+++++++++++++++++++++++")
         if self.isAgentTurn:
             print("My Turn!")
         else:
@@ -40,6 +41,7 @@ class Game:
             self.board = self.agent.move(self.board)
         else:
             possibles = self.board.next_boards()
+
             for i,b in enumerate(possibles):
                 print("Move {}:".format(i))
                 print(b)

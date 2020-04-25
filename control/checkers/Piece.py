@@ -13,3 +13,7 @@ class Piece:
         }
 
         return str(rep[self.belongsToAgent, self.isKing])
+
+    def crown(self):
+        self.isKing = True
+        return(0)

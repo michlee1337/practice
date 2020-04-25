@@ -23,31 +23,38 @@ class Agent:
                     balance -= 1
         return balance
 
-    def _getMax(board,a,b):
+    def _getMax(self,board,a,b,d):
         if d == self.max_depth:
-            return(self._utility(board))
+            board.val = self._utility(board)
+            return(None, board.val)
         board.val = -float("inf")
+        best_move = None
         for next_board in board.next_boards():
-            board.val = max(board.val,self._getMin(next_board,a,b))
+            _, next_v = self._getMin(next_board,a,b,d+1)
+            if next_v > board.val:
+                board.val = next_v
+                best_move = next_board
             if board.val >= b:
-                return(board.val)
+                return(best_move, board.val)
             a = max(a,board.val)
-        return(board.val)
+        return(best_move, board.val)
 
-    def _getMin(board,a,b,d):
+    def _getMin(self,board,a,b,d):
         if d == self.max_depth:
-            return(self._utility(board))
+            board.val = self._utility(board)
+            return(None, board.val)
         board.val = float("inf")
+        best_move = None
         for next_board in board.next_boards():
-            board.val = min(board.val,self._getMax(next_board,a,b))
+            _, next_v = self._getMax(next_board,a,b,d+1)
+            if next_v < board.val:
+                board.val = next_v
+                best_move = next_board
             if board.val <= a:
-                return(board.val)
+                return(best_move, board.val)
             b = min(b,board.val)
-        return(board.val)
+        return(best_move, board.val)
 
     def move(self,board):
-        v = self._getMax(board,-float("inf"),float("inf"),0)
-        for b in board.next_boards():
-            if b.val == v:
-                return(b)
-        raise RuntimeError("Move with given utility does not exist. Something went wrong during minimax search or move function.")
+        a,v = self._getMax(board,-float("inf"),float("inf"),0)
+        return(a)

@@ -19,6 +19,34 @@ class Board:
         self.isAgentTurn = isAgentTurn
         self.val = 0
 
+    def _setPieces(self,state):
+        '''
+        Accepts lists of strings as input and converts
+        to lists of pieces.
+        '''
+        print(state)
+        ll = [l.split(" ") for l in state]
+        ret = []
+        for l in ll:
+            row = []
+            for c in l:
+                if c == "_":
+                    row.append(0)
+                elif c == "x":
+                    row.append(Piece(True))
+                elif c == "X":
+                    row.append(Piece(True))
+                    row[-1].isKing = True
+                elif c == "o":
+                    row.append(Piece(False))
+                elif c == "O":
+                    row.append(Piece(False))
+                    row[-1].isKing = True
+                else:
+                    raise ValueError("Unrecognized piece")
+            ret.append(row)
+        return(ret)
+
     # pretty print state, for debugging and display
     def __repr__(self):
         res = "_____\n"
@@ -48,13 +76,12 @@ class Board:
         else:
             return [Board(s, not self.isAgentTurn) for s in simpleStates]
 
-    def noPieces(self, forAgent):
+    def noPieces(self, ofAgent):
         for row in self.state:
             for p in row:
-                if p != 0 and p.belongsToAgent != forAgent:
+                if p != 0 and p.belongsToAgent == ofAgent:
                     return(False)
         return(True)
-
 
     def _doCaptureMoves(self, state, piece, r, c, captured=False):
         '''
@@ -65,13 +92,18 @@ class Board:
         # helper: capture whatever is possible, return result
         def omnom(state,piece,r,c,rn,cn,rd,cd):
             # out of bounds
-            if rn+rd>7 or cn+cd>7:
+            if rn+rd>7 or cn+cd>7 or rn+rd < 0 or cn+cd < 0:
                 return([])
             if state[rn][cn] != 0 and state[rn][cn].belongsToAgent != piece.belongsToAgent and state[rn+rd][cn+cd] == 0:
                 nstate = copy.deepcopy(state) # references begone!
                 nstate[rn][cn] = 0 # eat
                 nstate[r][c], nstate[rn+rd][cn+cd] = 0, nstate[r][c] # move
-                return self._doCaptureMoves(nstate,piece, rn+rd, cn+cd, True) # must make all jumps possible
+                if piece.belongsToAgent and rn+rd == 0:
+                    piece.crown() # become king
+                elif not piece.belongsToAgent and rn+rd == 7:
+                    piece.crown() # become king
+                else:
+                    return self._doCaptureMoves(nstate,piece, rn+rd, cn+cd, True) # recurse to complete all captures
             return []
 
         # EXT: better direction abstraction
@@ -107,7 +139,6 @@ class Board:
         return(nstates)
 
     def _doSimpleMoves(self, state, piece, r, c):
-        print("MOVING PIECE: ",r,c)
         # moves based on whose piece it is
         # EXT: haha i really need to abstract this out
         dirs = {
@@ -118,11 +149,13 @@ class Board:
         for rd,cd in dirs[piece.belongsToAgent]:
             rn = r+rd
             cn = c+cd
-            print("Trying move to: ",rn,cn)
             # EXT: a board cell should be an object and blank/ piece are subclasses
             if rn >= 0 and cn >= 0 and rn<=7 and cn<=7 and state[rn][cn] == 0:
-                print("Accepted move to: ",rn,cn)
                 nstate = copy.deepcopy(state) # references begone!
                 nstate[r][c], nstate[rn][cn] = nstate[rn][cn], nstate[r][c]
+                if piece.belongsToAgent and rn == 0:
+                    piece.crown()
+                elif not piece.belongsToAgent and rn == 7:
+                    piece.crown()
                 nstates.append(nstate)
         return(nstates)

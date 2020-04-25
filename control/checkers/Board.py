@@ -17,7 +17,6 @@ class Board:
         else:
             self.state = state
         self.isAgentTurn = isAgentTurn
-        self.val = 0
 
     def _setPieces(self,state):
         '''

@@ -25,35 +25,33 @@ class Agent:
 
     def _getMax(self,board,a,b,d):
         if d == self.max_depth:
-            board.val = self._utility(board)
-            return(None, board.val)
-        board.val = -float("inf")
+            return(None, self._utility(board))
+        v = -float("inf")
         best_move = None
         for next_board in board.next_boards():
             _, next_v = self._getMin(next_board,a,b,d+1)
-            if next_v > board.val:
-                board.val = next_v
+            if next_v > v:
+                v = next_v
                 best_move = next_board
-            if board.val >= b:
-                return(best_move, board.val)
-            a = max(a,board.val)
-        return(best_move, board.val)
+            if v >= b:
+                return(best_move, v)
+            a = max(a,v)
+        return(best_move, v)
 
     def _getMin(self,board,a,b,d):
         if d == self.max_depth:
-            board.val = self._utility(board)
-            return(None, board.val)
-        board.val = float("inf")
+            return(None, self._utility(board))
+        v = float("inf")
         best_move = None
         for next_board in board.next_boards():
             _, next_v = self._getMax(next_board,a,b,d+1)
-            if next_v < board.val:
-                board.val = next_v
+            if next_v < v:
+                v = next_v
                 best_move = next_board
-            if board.val <= a:
-                return(best_move, board.val)
-            b = min(b,board.val)
-        return(best_move, board.val)
+
+                return(best_move, v)
+            b = min(b,v)
+        return(best_move, v)
 
     def move(self,board):
         a,v = self._getMax(board,-float("inf"),float("inf"),0)

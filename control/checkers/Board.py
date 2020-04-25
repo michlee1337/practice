@@ -4,9 +4,13 @@ import copy
 class Board:
     '''
     Attributes:
-        - state
-        - isAgentTurn
+        - state <List of Lists>: describes the cells of the board
+        - isAgentTurn <Boolean>: True if it is Agent's turn
 
+    Methods:
+        - customState: set your own board state using lists of lists of integers.
+        - nextBoards: returns boards that are valid in the next move.
+        - noPieces: checks if there are no more pieces of a given type.
     '''
     def __init__(self, state=None, isAgentTurn=False):
         if state is None:
@@ -36,8 +40,9 @@ class Board:
 
     def customState(self,state):
         '''
-        Accepts lists of integers as input and converts
-        to lists of pieces.
+        Update board state to the given custom value.
+
+        Input: lists of lists of integers
         '''
         transform = {
             0: 0,
@@ -50,6 +55,12 @@ class Board:
         return(0)
 
     def next_boards(self):
+        '''
+        Get the next boards reachable in one move.
+
+        Output: List of Boards
+        '''
+
         # for each piece
         nstates = []
         captureStates = []
@@ -69,6 +80,12 @@ class Board:
             return [Board(s, not self.isAgentTurn) for s in simpleStates]
 
     def noPieces(self, ofAgent):
+        '''
+        Checks if there are no more pieces of the given type.
+
+        Input: Boolean
+        Output: Boolean
+        '''
         for row in self.state:
             for p in row:
                 if p != 0 and p.belongsToAgent == ofAgent:
@@ -77,12 +94,16 @@ class Board:
 
     def _doCaptureMoves(self, state, piece, r, c, captured=False):
         '''
-        Recursive function.
-        Must make all jumps possible.
+        Internal Helper Function
+
+        Returns what board states are reachable by moving the given piece
+        in this present state using a capture move.
+
+        It is a recursive function.
         '''
 
-        # helper: capture whatever is possible, return result
-        def omnom(state,piece,r,c,rn,cn,rd,cd):
+        # nested helper: check if capture is possible in given direction and distance
+        def omnom(rn,cn,rd,cd):
             # out of bounds
             if rn+rd>7 or cn+cd>7 or rn+rd < 0 or cn+cd < 0:
                 return([])
@@ -109,11 +130,11 @@ class Board:
                 for k in range(1, 8):
                     rn = r+rd*k
                     cn = c+cd*k
-                    nstates += omnom(state,piece,r,c,rn,cn,rd,cd)
+                    nstates += omnom(rn,cn,rd,cd)
             else:
                 rn = r+rd
                 cn = c+cd
-                nstates += omnom(state,piece,r,c,rn,cn,rd,cd)
+                nstates += omnom(rn,cn,rd,cd)
 
         # base case: if no more captures possible but have captured before, return self
         if len(nstates) == 0 and captured:
@@ -122,8 +143,12 @@ class Board:
         return(nstates)
 
     def _doSimpleMoves(self, state, piece, r, c):
-        # moves based on whose piece it is
-        # EXT: haha i really need to abstract this out
+        '''
+        Internal Helper Function
+
+        Returns what board states are reachable by moving the given piece
+        in this present state using a non-capture move.
+        '''
 
         nstates = []
         for rd,cd in piece.getDirs():

@@ -108,10 +108,6 @@ class Board:
                     return self._doCaptureMoves(nstate,piece, rn+rd, cn+cd, True) # recurse to complete all captures
             return []
 
-        # EXT: better direction abstraction
-        rowDist = {-1: r, 1: 7-r}
-        colDist = {-1: c, 1: 7-c}
-
         if piece.isKing:
             dirs = [(1,-1),(1,1),(-1,-1),(-1,1)] # left up, right up, left down, right down
         elif piece.belongsToAgent:
@@ -124,7 +120,8 @@ class Board:
         # handle kings
         for rd,cd in dirs:
             if piece.isKing:
-                for k in range(1,min(rowDist[rd], colDist[cd]),1):
+                #for k in range(1,min(rowDist[rd], colDist[cd]),1):
+                for k in range(1, 8):
                     rn = r+rd*k
                     cn = c+cd*k
                     nstates += omnom(state,piece,r,c,rn,cn,rd,cd)

@@ -22,6 +22,8 @@ Run `python test.py`
 
 It will run 20 simulations for each possible configuration (excluding difficulty hard in interest of runtime) and output a dictionary of wins deduct losses.
 
+A file dump on a sample output of running the testfile is available as `testdump`.
+
 # Code structure
 `checkers.py` contains the very short driver code.
 

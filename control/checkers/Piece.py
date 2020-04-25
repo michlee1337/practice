@@ -1,7 +1,7 @@
 class Piece:
-    def __init__(self, belongsToAgent):
+    def __init__(self, belongsToAgent, isKing=False):
         self.belongsToAgent = belongsToAgent
-        self.isKing = False
+        self.isKing = isKing
 
     def __repr__(self):
         # might change later

@@ -2,6 +2,12 @@ from Piece import *
 import copy
 
 class Board:
+    '''
+    Attributes:
+        - state
+        - isAgentTurn
+
+    '''
     def __init__(self, state=None, isAgentTurn=False):
         if state is None:
             self.state = [
@@ -18,34 +24,6 @@ class Board:
             self.state = state
         self.isAgentTurn = isAgentTurn
 
-    def _setPieces(self,state):
-        '''
-        Accepts lists of strings as input and converts
-        to lists of pieces.
-        '''
-        print(state)
-        ll = [l.split(" ") for l in state]
-        ret = []
-        for l in ll:
-            row = []
-            for c in l:
-                if c == "_":
-                    row.append(0)
-                elif c == "x":
-                    row.append(Piece(True))
-                elif c == "X":
-                    row.append(Piece(True))
-                    row[-1].isKing = True
-                elif c == "o":
-                    row.append(Piece(False))
-                elif c == "O":
-                    row.append(Piece(False))
-                    row[-1].isKing = True
-                else:
-                    raise ValueError("Unrecognized piece")
-            ret.append(row)
-        return(ret)
-
     # pretty print state, for debugging and display
     def __repr__(self):
         res = "_____\n"
@@ -55,6 +33,21 @@ class Board:
         res += "_____\n"
         res = res.replace('0','_')
         return res
+
+    def customState(self,state):
+        '''
+        Accepts lists of integers as input and converts
+        to lists of pieces.
+        '''
+        transform = {
+            0: 0,
+            1: Piece(True),
+            2: Piece(True, True),
+            -1: Piece(False),
+            -2: Piece(False,True)
+        }
+        self.state = [[transform[v] for v in row] for row in state]
+        return(0)
 
     def next_boards(self):
         # for each piece

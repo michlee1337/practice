@@ -11,7 +11,7 @@ Created on Sat Apr 25 14:01:19 2020
 import os
 from tkinter import Tk, StringVar
 from tkinter.ttk import Button, Label, Frame
-
+from itertools import count
 # Check if pyswip package needs to be installed
 
 from pyswip.prolog import Prolog
@@ -22,19 +22,25 @@ prolog = Prolog() # Global handle to interpreter
 retractall = Functor("retractall")
 known = Functor("known",3)
 
+marker = 0
+responses = []
+
 # Define foreign functions to read user input and write to the screen
 def write_py(X):
+    
     sys.stdout.flush()
     return True
 
 def read_py(A,V,Y):
+    global marker
     if isinstance(Y, Variable):
-        # update question label text
         question.config(text=str(A) + " is " + str(V) + "? ")
-        # wait to get user input from response entry
+        output.config(text=)
         y_button.wait_variable(var)
-        response = str(var)
+        responses.append(var)
+        response = str(responses[marker])
         print(type(response))
+        marker += 1
         Y.unify(response)
         return True
     else:
@@ -44,9 +50,7 @@ registerForeign(read_py, arity = 3)
 registerForeign(write_py, arity = 1)
 
 prolog.consult("ES.pl") # open the KB for consulting
-
 call(retractall(known))
-
 
 # GUI
 root = Tk()
@@ -66,11 +70,9 @@ output = Label(frame,text='')
 output.grid(column=0,row=3,columnspan=2)
 
 action = [s for s in prolog.query("action(X).", maxresult=1)]
-# update result label text
-result = "You should " + (action[0]['X'] + "." if action else "hang tight.")
-print(result)
-#output.config(text=result)
+print("You should " + (action[0]['X'] + "." if action else "hang tight."))
 
-
-
+output.config(text=result)
 root.mainloop()
+
+

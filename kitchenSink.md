@@ -16,4 +16,5 @@
 - trees: careful w comp parent or child
 - backtrackinggggg
 - level order traversal: pre traversal
+- should get better w tree serial/ deserial
 https://leetcode.com/problems/binary-tree-level-order-traversal/discuss/114449/A-general-approach-to-level-order-traversal-questions-in-Java

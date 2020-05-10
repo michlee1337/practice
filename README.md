@@ -43,7 +43,17 @@ ______
 
 # Heuristics for Solution Design (under Step 3)
 - what is the key variable?
-- can you draw it out? do a few and see if you can find a pattern
+- can you draw it out? do a few and see if you can find a pattern.
+- what is the question asking? Are there definitions you can use? Can you express it in a different way? ex: as a search problem?
+- is the state changing? along what dimensions?
+- patterns
+  - k-most or whatever with k = heap
+  - find/ guess/ first/ number of = binary search
+  - remove/ some kind of adjency relationship/ ranges/ intervals = two pointer
+  - search + mutation like anagram/ tracking longest or minimum = hash map
+  - tree involved = recursive
+  - optimal substructure/ best path = dp
+  - nested = stack
 
 # Gotchas
 - UNDERSTANDING

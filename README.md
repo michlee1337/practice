@@ -54,6 +54,9 @@ ______
   - tree involved = recursive
   - optimal substructure/ best path = dp
   - nested = stack
+  - lookup = hash table (dict)
+  - monotonic pattern = stack
+  - ordered = queue
 
 # Gotchas
 - UNDERSTANDING

@@ -24,12 +24,13 @@
     2. Unnecessary work (avoid)
     3. Repeated work (caches)
 
-# Heuristics for Solution Design (under Step 3)
-- what is the key variable?
-- can you draw it out? do a few and see if you can find a pattern.
-- what is the question asking? Are there definitions you can use? Can you express it in a different way? ex: as a search problem?
-- is the state changing? along what dimensions?
-- patterns
+# Heuristics for Solution Design
+- Getting the gist of it
+  - what is the key variable?
+  - can you draw it out? do a few and see if you can find a pattern.
+  - what is the question asking? Are there definitions you can use? Can you express it in a different way? ex: as a search problem?
+  - is the state changing? along what dimensions?
+- Patterns to look out for
   - k-most or whatever with k = heap
   - find/ guess/ first/ number of = binary search
   - remove/ some kind of adjency relationship/ ranges/ intervals = two pointer

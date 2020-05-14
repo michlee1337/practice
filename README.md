@@ -1,20 +1,3 @@
-#! to review
-!! i still don't get the increasing substring q
-? is setting a whole row faster than setting each element?
-!? why doesn't the factor approach work for sqrt
-? how to know when to use binary search (sqrt q)
-  - searching in one dimension
-! learn graphs and search/ traversal better
-!! I think i need to do an algorithms course :P
-
-!! with recusive/ search problems (often searches are recursive problems)
-- find a dimension you can break down along
-  - ex: longest subarray: subarrays of len x
-  - watch .006 on DP
-!! Greedy: see if its possible. strictly increasing/ monotonous things normally make it possible
-!! get familiar w bfs vs dfs in perms and other scenarios
-?? How can I tell when the entire search space needs to be searched? no heuristic? (ex: coin change)
-______
 
 # General Approach
 1. Clarify

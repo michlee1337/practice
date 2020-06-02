@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package gradebook;
+
+import "src/student.proto";
+
+message GradeBook {
+  repeated Student students = 1;
+}

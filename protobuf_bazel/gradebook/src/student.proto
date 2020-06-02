@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package gradebook;
+
+import "src/grade.proto";
+
+message Student {
+  string name = 1;
+  int32 id = 2;
+  string email = 3;
+  repeated Grade grades = 4;
+}

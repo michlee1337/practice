@@ -30,7 +30,7 @@ void PromptForGrade(gradebook::Student* student) {
       break;
     }
 
-    gradebook::Student::Grade* grade = student->add_grades();
+    gradebook::Grade::Grade* grade = student->add_grades();
     grade->set_grade(grade);
 
     cout << "What course is this for?";

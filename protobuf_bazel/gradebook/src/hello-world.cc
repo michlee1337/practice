@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "gradebook.pb.h"
+#include "src/gradebook.pb.h"
 using namespace std;
 
 // This function fills in a Student message based on user input.

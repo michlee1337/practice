@@ -1,16 +1,8 @@
 # _____ import build rules for c++ and proto _____
 ## rules_cc: generate c++ from protobuf
 ## rules_proto: build protobuf
-load("@rules_cc//cc:defs.bzl", "cc_library")
-load("@rules_cc//cc:defs.bzl", "cc_binary")
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_proto_library")
 load("@rules_proto//proto:defs.bzl", "proto_library")
-
-# _____ build cpp binary files from cpp _____
-cc_binary(
-    name = "hello-world",
-    srcs = ["hello-world.cc"],
-    deps = [":gradebook_cc_proto"],
-)
 
 # _____ build cpp from proto _____
 cc_proto_library(
@@ -37,4 +29,11 @@ proto_library(
 proto_library(
   name = "grade_proto",
   srcs = ["grade.proto"],
+)
+
+# _____ build cpp binary files from cpp _____
+cc_binary(
+    name = "helloworld_cpp",
+    srcs = ["hello-world.cc"],
+    deps = [":gradebook_cc_proto"],
 )

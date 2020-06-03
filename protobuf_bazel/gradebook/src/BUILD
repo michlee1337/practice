@@ -9,6 +9,7 @@ load("@rules_proto//proto:defs.bzl", "proto_library")
 cc_binary(
     name = "hello-world",
     srcs = ["hello-world.cc"],
+    deps = [":gradebook_cc_proto"],
 )
 
 # _____ build cpp from proto _____

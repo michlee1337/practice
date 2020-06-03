@@ -1,6 +1,6 @@
-# Setup
-Install Bazel and Protobuf
-
 # To Run
-`bazel build //src:hello-world`
-`./gradebook/bazel-bin/src/hello-world.runfiles/gradebook/src/hello-world`
+1) Build the executable
+`bazel build //src:helloworld_cpp`
+
+2) Run
+`bazel-bin/src/helloworld_cpp gradebook.data`

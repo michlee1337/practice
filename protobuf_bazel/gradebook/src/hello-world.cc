@@ -26,30 +26,30 @@ void PromptForGrade(gradebook::Student* student) {
   }
 
   while (true) {
-    cout << "Enter a grade (or leave blank to finish): ";
-    string grade;
-    getline(cin, grade);
-    if (grade.empty()) {
+    cout << "Enter a course (or leave blank to finish): ";
+    string course;
+    getline(cin, course);
+    if (course.empty()) {
       break;
     }
 
-    gradebook::Grade::Grade* grade = student->add_grades();
-    grade->set_grade(grade);
+    gradebook::Grade* grade = student->add_grades();
+    grade->set_course(course);
 
-    cout << "What course is this for?";
-    string course;
-    getline(cin, course);
-    student->set_course(course);
+    cout << "What grade did you get?";
+    int score;
+    cin >> score;
+    grade->set_grade(score);
 
     cout << "What year is this for?";
     int year;
-    getline(cin, year);
-    student->set_year(year);
+    cin >> year;
+    grade->set_year(year);
 
     cout << "What semester is this for?";
     int semester;
-    getline(cin, semester);
-    student->set_semester(semester);
+    cin >> semester;
+    grade->set_semester(semester);
   }
 }
 
@@ -73,8 +73,8 @@ int main(int argc, char* argv[]) {
     fstream input(argv[1], ios::in | ios::binary);
     if (!input) {
       cout << argv[1] << ": File not found.  Creating a new file." << endl;
-    } else if (!int.ParseFromIstream(&input)) {
-      cerr << "Failed to parse address book." << endl;
+    } else if (!gradebook.ParseFromIstream(&input)) {
+      cerr << "Failed to parse grade book." << endl;
       return -1;
     }
   }

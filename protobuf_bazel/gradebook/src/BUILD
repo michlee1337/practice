@@ -2,20 +2,22 @@
 ## rules_cc: generate c++ from protobuf
 ## rules_proto: build protobuf
 load("@rules_cc//cc:defs.bzl", "cc_library")
+load("@rules_cc//cc:defs.bzl", "cc_binary")
 load("@rules_proto//proto:defs.bzl", "proto_library")
 
-cc_proto_library(
-  name = "student_cc_proto",
-  deps = [":student_proto"],
+# _____ build cpp binary files from cpp _____
+cc_binary(
+    name = "hello-world",
+    srcs = ["hello-world.cc"],
 )
 
-# _____ cpp build rules _____
+# _____ build cpp from proto _____
 cc_proto_library(
   name = "gradebook_cc_proto",
   deps = [":gradebook_proto"],
 )
 
-# _____ proto build rules _____
+# _____ build proto from proto _____
 ## convention: one rule per proto file
 ## convention: leave colon in name for rule labels
 

@@ -35,3 +35,8 @@ https://leetcode.com/problems/binary-tree-level-order-traversal/discuss/114449/A
 !! Greedy: see if its possible. strictly increasing/ monotonous things normally make it possible
 !! get familiar w bfs vs dfs in perms and other scenarios
 ?? How can I tell when the entire search space needs to be searched? no heuristic? (ex: coin change)
+
+Brush up
+- nested loops
+- serial/ deserial
+- binary

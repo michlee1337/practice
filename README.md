@@ -23,6 +23,7 @@
     1. Bottlenecks (longest time step)
     2. Unnecessary work (avoid)
     3. Repeated work (caches)
+    4. Limited ranges of input (can compress to store in constant space, ex english alphabet is 26)
 
 # Heuristics for Solution Design
 - Getting the gist of it
@@ -31,7 +32,8 @@
   - what is the question asking? Are there definitions you can use? Can you express it in a different way? ex: as a search problem?
   - is the state changing? along what dimensions?
 - Patterns to look out for
-  - k-most or whatever with k = heap
+  - k-most/ kth = heap (online) or quickselect (faster)
+  - k-index = partition
   - find/ guess/ first/ number of = binary search
   - remove/ some kind of adjency relationship/ ranges/ intervals = two pointer
   - search + mutation like anagram/ tracking longest or minimum = hash map
@@ -41,6 +43,14 @@
   - lookup = hash table (dict)
   - monotonic pattern = stack
   - ordered = queue
+  - tuples = graph
+  - substr = sliding window
+  - generate = backtracking
+  - list with one duplicate = cycle detection
+- translations
+  - max = sum - min
+  - x-highest = x index in sorted
+  - permutation = same char freq count
 
 # Gotchas
 - UNDERSTANDING
@@ -95,6 +105,7 @@
     - ex: vectors for directions
 - use 0/ infinity in max/ min calcs to handle edge cases within traversal
 - multiply to check for matching parity
+- while not empty/ not zero: while list/ dict/ int
 
 # Heuristics for best possible
 - comparison based sorting algorithms are lower bounded by nlgn

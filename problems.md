@@ -20,3 +20,12 @@
 - identifying the logic specifically
   - the only special case is on "overflow", otherwise functions exactly the same
 - the off by one is rough
+
+# Fundamentals
+## Tree
+- serial/deserial
+## DP
+- Longest Common Subsequence
+- Buy/ Sell Stock
+## Greedy
+- House Robber

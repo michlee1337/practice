@@ -51,6 +51,10 @@
   - max = sum - min
   - x-highest = x index in sorted
   - permutation = same char freq count
+  - list of integers can be translated to singly linked list (each element contains real number attributes: value and index)
+    - commonly: cycle detection problem
+  - list of two tuples can be an adjacency list of graph  
+    - commonly: union find/ topological sort problem
 
 # Gotchas
 - UNDERSTANDING

@@ -1,0 +1,68 @@
+class ATM():
+    def __init__(self, ind):
+      """
+      ind: Identifier.
+
+      atms: List of ATMS that are connected with the this ATM
+
+      accounts: Balance Reference Dictionary of all ATMS
+      """
+      self.ind = ind
+      self.atms = []
+      self.accounts_count = 0
+      self.accounts = {}
+
+    def create_account(self, account_num):
+        self.accounts[account_num] = 0.0
+        for atm in self.atms:
+            atm.accounts[account_num] = 0.0
+
+    def process_transaction(self, account_num, amount):
+        if len(self.atms) < self.accounts_count:
+          raise NetworkError("Can't reach all machines currently.")
+        else:
+          self.accounts[account_num] += amount
+          for atm in self.atms:
+              atm.accounts[account_num] += amount
+    def __repr__(self):
+        atm_inds = [a.ind for a in self.atms]
+        return "ATM(%r): \n\tatms: %r\n\taccounts: %r\n" % (self.ind, atm_inds, self.accounts)
+
+
+atms_network = []
+def atm_builder(ind):
+    """Pass in a unique identifier to create an ATM"""
+    global atms_network
+    new_atm = ATM(ind)
+    new_atm.atms = atms_network.copy()
+    atm.accounts_count = len(atms_network)
+    for atm in atms_network:
+        atm.atms.append(new_atm)
+        atm.accounts_count += 1
+
+    atms_network.append(new_atm)
+
+# Create ATMS
+
+number_atms = 5
+
+for a in range(number_atms):
+  # Here we create number_atms and pass a unique value to each one.
+    atm_builder(a)
+
+for a in range(100,105):
+    atms_network[0].create_account(a)
+
+atms_network[3].process_transaction(101, +3.14)
+atms_network[3].process_transaction(102, -3.14)
+
+# TODO: SIMULATE A NETWORK PARTITION
+atms_network[2].pop()
+
+# TODO: DECIDE ON CONSISTENT / AVAILABLE ARCHITECTURE
+# impl in process_transaction
+
+# TODO: SHOW WHAT HAPPENS WHEN A NEW TRANSACTION HAPPENS
+atms_network[3].process_transaction(101, +100)
+
+print(atms_network)
